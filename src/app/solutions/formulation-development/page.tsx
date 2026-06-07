@@ -23,7 +23,7 @@ export default function FormulationDevelopmentPage() {
                             <span className={styles.accent}> Formulation Development</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
-                            Expert formulation services maximizing the stability, safety, and efficacy of complex biologics. We develop robust, scalable, and patentable formulations tailored to your molecule's specific needs.
+                            Expert formulation services maximizing the stability, safety, and efficacy of complex biologics. We develop robust, scalable, and patentable formulations tailored to your molecule&apos;s specific needs.
                         </p>
                         <div className={styles.heroCtas}>
                             <Link href="/contact" className={styles.ctaPrimary}>Request a Quote</Link>
