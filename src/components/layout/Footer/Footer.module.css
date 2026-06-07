@@ -1,0 +1,230 @@
+.footer {
+    background: var(--color-gray-950);
+    color: white;
+    border-top: 1px solid var(--color-gray-800);
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+}
+
+/* Top Section */
+.topSection {
+    padding: var(--space-16) 0 var(--space-12);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: 350px 1fr;
+        gap: var(--space-16);
+    }
+}
+
+/* Brand Column */
+.brandColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.logoText {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    background: linear-gradient(135deg, var(--color-primary-400), var(--color-secondary-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tagline {
+    font-size: var(--text-sm);
+    color: var(--color-gray-400);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-6);
+    max-width: 300px;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+}
+
+.contactLink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-gray-300);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color var(--transition-fast);
+}
+
+.contactLink:hover {
+    color: var(--color-secondary-400);
+}
+
+.contactLink svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--color-primary-500);
+}
+
+/* Cert Badges */
+.certBadges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.certBadge {
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-gray-900);
+    border-radius: var(--radius-sm);
+    font-size: 0.65rem;
+    font-weight: var(--font-semibold);
+    color: var(--color-gray-400);
+    border: 1px solid var(--color-gray-800);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Navigation Columns */
+.navGroup {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+}
+
+@media (min-width: 640px) {
+    .navGroup {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.navColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.columnTitle {
+    font-family: var(--font-family-heading);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-6);
+}
+
+.navList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navLink {
+    font-size: var(--text-sm);
+    color: var(--color-gray-400);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.navLink:hover {
+    color: var(--color-secondary-400);
+}
+
+/* Bottom Section */
+.bottomSection {
+    padding: var(--space-6) 0;
+    border-top: 1px solid var(--color-gray-800);
+    background: var(--color-gray-950);
+}
+
+.bottomContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: center;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .bottomContent {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        text-align: left;
+    }
+}
+
+.copyrightGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.copyright {
+    font-size: var(--text-sm);
+    color: var(--color-gray-400);
+    margin: 0;
+}
+
+.address {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin: 0;
+}
+
+/* Social Links */
+.social {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--color-gray-900);
+    border-radius: var(--radius-full);
+    color: var(--color-gray-400);
+    transition: all var(--transition-fast);
+    border: 1px solid var(--color-gray-800);
+}
+
+.socialLink:hover {
+    background: var(--color-primary-600);
+    border-color: var(--color-primary-500);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.socialLink svg {
+    width: 16px;
+    height: 16px;
+}

@@ -1,0 +1,22 @@
+# Leelabiologics Robots.txt
+# https://leelabiologics.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow all crawlers to access CSS, JS, and images
+Allow: /_next/static/
+Allow: /images/
+Allow: /icons/
+
+# Sitemap location
+Sitemap: https://leelabiologics.com/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
