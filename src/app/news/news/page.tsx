@@ -142,10 +142,10 @@ export default function NewsPage() {
                     <aside className={styles.newsletterCard}>
                         <h2 id="newsletter-title">Subscribe to the Leela Biologics Newsletter</h2>
                         <p>Receive bi-monthly updates on CDMO capacity, whitepapers, and regulatory insights directly to your inbox.</p>
-                        <form className={styles.newsletterForm} onSubmit={(e) => e.preventDefault()}>
+                        <form className={styles.newsletterForm}>
                             <label htmlFor="email-input" className="sr-only">Email Address</label>
                             <input id="email-input" type="email" placeholder="Enter your corporate email address" required />
-                            <button type="submit" aria-label="Subscribe">Subscribe</button>
+                            <button type="button" aria-label="Subscribe">Subscribe</button>
                         </form>
                     </aside>
                 </div>
