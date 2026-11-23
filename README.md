@@ -18,7 +18,7 @@ npm run build
 npm start
 ```
 
-Open [www.leelabiologics.com](leelabiologics.com) to view the site.
+Open https://leelabiologics.com/ to view the site.
 
 ## 🛠 Technology Stack
 
