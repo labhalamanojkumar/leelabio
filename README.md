@@ -18,7 +18,7 @@ npm run build
 npm start
 ```
 
-Open [http://localhost:3000](leelabiologics.com) to view the site.
+Open [www.leelabiologics.com](leelabiologics.com) to view the site.
 
 ## 🛠 Technology Stack
 
