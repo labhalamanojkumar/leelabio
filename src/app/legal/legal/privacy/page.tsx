@@ -3,17 +3,17 @@ import { SITE_CONFIG } from '@/lib/constants';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy | Leela Biologics',
-    description: 'Leela Biologics Private Limited privacy policy describing how we collect, use, and protect your personal information in compliance with global data protection regulations.',
+    title: 'Privacy Policy | Leelabiologics',
+    description: 'Leelabiologics privacy policy describing how we collect, use, and protect your personal information in compliance with global data protection regulations.',
     keywords: [
         'privacy policy',
         'data protection',
-        'Leela Biologics privacy',
+        'Leelabiologics privacy',
         'GDPR compliance',
         'CDMO data security'
     ],
     openGraph: {
-        title: 'Privacy Policy | Leela Biologics',
+        title: 'Privacy Policy | Leelabiologics',
         description: 'Read our comprehensive privacy policy governing data protection and security.',
         type: 'website',
         url: `${SITE_CONFIG.url}/legal/privacy`,
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'Privacy Policy - Leela Biologics',
+        name: 'Privacy Policy - Leelabiologics',
         description: metadata.description,
         url: `${SITE_CONFIG.url}/legal/privacy`,
         publisher: {
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
                     <section>
                         <h2>1. Introduction & Commitment to Privacy</h2>
                         <p>
-                            Leela Biologics Private Limited (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is deeply committed to protecting your privacy and ensuring the security of your personal and corporate data.
+                            Leelabiologics (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is deeply committed to protecting your privacy and ensuring the security of your personal and corporate data.
                             As a leading biologics Contract Development and Manufacturing Organization (CDMO), we understand the critical nature of confidentiality, data integrity, and regulatory compliance.
                             This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you visit our website, interact with our client portals, or engage our biomanufacturing services.
                         </p>
@@ -118,7 +118,7 @@ export default function PrivacyPage() {
                     <section>
                         <h2>6. Data Security Measures</h2>
                         <p>
-                            Leela Biologics employs robust technical and organizational security measures to protect your data against unauthorized access, alteration, or destruction. This includes enterprise-grade encryption (in transit and at rest), strict access controls, regular security audits, and secure, segmented client data portals.
+                            Leelabiologics employs robust technical and organizational security measures to protect your data against unauthorized access, alteration, or destruction. This includes enterprise-grade encryption (in transit and at rest), strict access controls, regular security audits, and secure, segmented client data portals.
                         </p>
                     </section>
 
@@ -128,7 +128,8 @@ export default function PrivacyPage() {
                             If you have questions regarding this Privacy Policy, wish to exercise your data rights, or need to report a privacy concern, please contact our Data Protection Officer at:
                             <br /><br />
                             <strong>Email:</strong> privacy@leelabiologics.com<br />
-                            <strong>Address:</strong> Leela Biologics Private Limited, Balaji Nagar, Pendurthi, Visakhapatnam, Andhra Pradesh 531171, India
+                            <strong>Registered Office:</strong> Leelabiologics, Balaji Nagar, Pendurthi, Visakhapatnam-531171, Andhra Pradesh, India<br />
+                            <strong>Corporate Office:</strong> Leelabiologics, 3rd Floor, World Trade Center (WTC), VM Steel Project S.O, Pragati Maidan, AIC-AMTZ Medi Valley Incubation Council, Andhra Pradesh MedTech Zone (AMTZ), Visakhapatnam-530031, Andhra Pradesh, India
                         </p>
                     </section>
                 </article>

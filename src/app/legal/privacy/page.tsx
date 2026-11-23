@@ -3,7 +3,7 @@ import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
     title: 'Privacy Policy',
-    description: 'Leela Biologics Private Limited privacy policy describing how we collect, use, and protect your personal information.',
+    description: 'Leelabiologics privacy policy describing how we collect, use, and protect your personal information.',
 };
 
 export default function PrivacyPage() {
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
                 <section>
                     <h2>1. Introduction</h2>
                     <p>
-                        Leela Biologics Private Limited (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy.
+                        Leelabiologics (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy.
                         This Privacy Policy explains how we collect, use, disclose, and safeguard your
                         information when you visit our website or engage with our services.
                     </p>

@@ -3,8 +3,8 @@ import { SITE_CONFIG } from '@/lib/constants';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
-    title: 'GMP & Quality Statement | Leela Biologics',
-    description: 'Leela Biologics Quality Statement detailing our rigorous compliance with global cGMP and GLP regulations, including FDA, EMA, and ICH guidelines for biologics manufacturing.',
+    title: 'GMP & Quality Statement | Leelabiologics',
+    description: 'Leelabiologics Quality Statement detailing our rigorous compliance with global cGMP and GLP regulations, including FDA, EMA, and ICH guidelines for biologics manufacturing.',
     keywords: [
         'GMP statement',
         'quality assurance biologics',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         'EMA certified'
     ],
     openGraph: {
-        title: 'GMP & Quality Statement | Leela Biologics',
+        title: 'GMP & Quality Statement | Leelabiologics',
         description: 'Review our uncompromising commitment to global quality standards and regulatory compliance.',
         type: 'website',
         url: `${SITE_CONFIG.url}/legal/gmp-statement`,
@@ -28,7 +28,7 @@ export default function GMPStatementPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'GMP & Quality Statement - Leela Biologics',
+        name: 'GMP & Quality Statement - Leelabiologics',
         description: metadata.description,
         url: `${SITE_CONFIG.url}/legal/gmp-statement`,
     };
@@ -49,7 +49,7 @@ export default function GMPStatementPage() {
                     <section>
                         <h2>Our Unwavering Commitment to Quality</h2>
                         <p>
-                            At Leela Biologics Private Limited, quality is not just a department—it is the foundational pillar of our corporate culture. We recognize that the biologics we develop and manufacture are destined for patients whose lives depend on them. 
+                            At Leelabiologics, quality is not just a department—it is the foundational pillar of our corporate culture. We recognize that the biologics we develop and manufacture are destined for patients whose lives depend on them.
                             Therefore, we maintain rigorous, phase-appropriate Quality Management Systems (QMS) that comply strictly with current Good Manufacturing Practice (cGMP) and Good Laboratory Practice (GLP) regulations globally.
                         </p>
                     </section>
@@ -111,7 +111,7 @@ export default function GMPStatementPage() {
                             To request our Quality Manual, review our regulatory inspection history, or schedule a facility audit, please contact our Quality department:
                             <br /><br />
                             <strong>Email:</strong> quality@leelabiologics.com<br />
-                            <strong>Address:</strong> Quality Unit, Leela Biologics Private Limited, Visakhapatnam, AP, India
+                            <strong>Address:</strong> Quality Unit, Leelabiologics, Visakhapatnam, AP, India
                         </p>
                     </section>
                 </article>

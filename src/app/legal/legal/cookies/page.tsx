@@ -3,18 +3,18 @@ import { SITE_CONFIG } from '@/lib/constants';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
-    title: 'Cookie Policy | Leela Biologics',
-    description: 'Leela Biologics Cookie Policy explaining how we use cookies and tracking technologies to improve user experience and analyze website traffic.',
+    title: 'Cookie Policy | Leelabiologics',
+    description: 'Leelabiologics Cookie Policy explaining how we use cookies and tracking technologies to improve user experience and analyze website traffic.',
     keywords: [
         'cookie policy',
         'website tracking',
-        'Leela Biologics cookies',
+        'Leelabiologics cookies',
         'privacy',
         'data collection'
     ],
     openGraph: {
-        title: 'Cookie Policy | Leela Biologics',
-        description: 'Understand how Leela Biologics uses cookies to enhance your digital experience.',
+        title: 'Cookie Policy | Leelabiologics',
+        description: 'Understand how Leelabiologics uses cookies to enhance your digital experience.',
         type: 'website',
         url: `${SITE_CONFIG.url}/legal/cookies`,
     },
@@ -27,7 +27,7 @@ export default function CookiesPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'Cookie Policy - Leela Biologics',
+        name: 'Cookie Policy - Leelabiologics',
         description: metadata.description,
         url: `${SITE_CONFIG.url}/legal/cookies`,
     };
@@ -56,7 +56,7 @@ export default function CookiesPage() {
                     <section>
                         <h2>2. How We Use Cookies</h2>
                         <p>
-                            Leela Biologics utilizes cookies to ensure our digital platforms operate securely and efficiently. We use cookies for the following purposes:
+                            Leelabiologics utilizes cookies to ensure our digital platforms operate securely and efficiently. We use cookies for the following purposes:
                         </p>
                         <ul>
                             <li><strong>Essential/Strictly Necessary Cookies:</strong> These are required for the operation of our website, such as enabling secure logins to client portals or navigating between pages smoothly. The website cannot function properly without these.</li>

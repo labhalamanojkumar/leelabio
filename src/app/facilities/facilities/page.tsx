@@ -5,7 +5,7 @@ import styles from './page.module.css';
 
 export const metadata: Metadata = {
     title: 'Manufacturing Facilities - GMP Biologics Production',
-    description: 'Explore Leela Biologics\' state-of-the-art GMP manufacturing facilities, advanced cleanroom suites, high-capacity bioreactors, and analytical laboratories for biologics CDMO services.',
+    description: 'Explore Leelabiologics\'s state-of-the-art GMP manufacturing facilities, advanced cleanroom suites, high-capacity bioreactors, and analytical laboratories for biologics CDMO services.',
     keywords: [
         'GMP manufacturing facility',
         'biologics facility',
@@ -62,12 +62,12 @@ export default function FacilitiesPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'Leela Biologics Manufacturing Facilities',
+        name: 'Leelabiologics Manufacturing Facilities',
         description: metadata.description,
         url: `${SITE_CONFIG.url}/facilities`,
         mainEntity: {
             '@type': 'MedicalOrganization',
-            name: 'Leela Biologics Manufacturing Facilities',
+            name: 'Leelabiologics Manufacturing Facilities',
             medicalSpecialty: ['Biologics Manufacturing', 'Pharmaceutical Development'],
         }
     };

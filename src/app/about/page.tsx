@@ -6,7 +6,7 @@ import styles from './page.module.css';
 
 export const metadata: Metadata = {
     title: 'About Us - Our Mission & Approach',
-    description: 'Learn about Leela biologics\'s mission, leadership team, quality standards, and commitment to advancing biologics development. 25+ years of expertise in drug development.',
+    description: 'Learn about Leelabiologics\'s mission, leadership team, quality standards, and commitment to advancing biologics development. 20+ years of expertise in drug development.',
     keywords: ['biologics company', 'CDMO about', 'drug development company', 'GMP manufacturing'],
 };
 
@@ -18,12 +18,12 @@ const LEADERSHIP_TEAM = [
     },
 
     {
-        name: 'Pavani Nalla',
+        name: 'Mrs. Pavani Nalla',
         title: 'Co-founder and Chief Operating Officer',
         bio: 'Extensive expertise in Analytical characterization and Quality assurance.',
     },
     {
-        name: 'Bhanu Bhalchandra',
+        name: 'Dr. Pournima',
         title: 'Chief Scientific Officer',
         bio: 'Extensive expertise in scientific operations and biologics development.',
     },
@@ -39,10 +39,10 @@ export default function AboutPage() {
                 <div className={styles.heroBackground}></div>
                 <div className={styles.container}>
                     <div className={styles.heroContent}>
-                        <span className={styles.badge}>About Leela biologics</span>
+                        <span className={styles.badge}>About Leelabiologics</span>
                         <h1 className={styles.heroTitle}>
                             Accelerating the Future of
-                            <span className={styles.accent}> Biologics Medicine</span>
+                            <span className={styles.accent}> Medicine</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
                             Driven by the spirit of &lsquo;Make in India&rsquo;, we transform breakthrough science into life-changing therapeutics. With an unwavering commitment to world-class manufacturing and scientific excellence, we deliver next-generation biologics that are not only innovative but also affordable and accessible&mdash;ensuring better health outcomes for patients worldwide.

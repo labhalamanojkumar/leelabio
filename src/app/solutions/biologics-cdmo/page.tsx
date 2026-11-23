@@ -32,25 +32,6 @@ const CAPABILITIES = [
     },
 ];
 
-const FAQS = [
-    {
-        question: 'What biologics modalities do you support?',
-        answer: 'We support a wide range of biologics including monoclonal antibodies, bispecific antibodies, Fc-fusion proteins, recombinant proteins, antibody-drug conjugates (ADCs), and biosimilars.',
-    },
-    {
-        question: 'What is your typical project timeline?',
-        answer: 'Timelines vary based on project scope. Cell line development typically takes 4-6 months, process development 3-6 months, and clinical manufacturing can begin within 12-18 months from project initiation.',
-    },
-    {
-        question: 'Do you support tech transfer projects?',
-        answer: 'Yes, we have extensive experience in technology transfer both in and out. Our team follows established protocols to ensure seamless process transfer with full documentation.',
-    },
-    {
-        question: 'What regulatory experience do you have?',
-        answer: 'Our team has supported 50+ IND/CTA filings and 10+ commercial product launches. We have experience with FDA, EMA, PMDA, and other major regulatory agencies.',
-    },
-];
-
 export default function BiologicsCDMOPage() {
     return (
         <>
@@ -236,22 +217,6 @@ export default function BiologicsCDMOPage() {
                 </div>
             </section>
 
-            {/* FAQ */}
-            <section className={styles.faq}>
-                <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
-                        <h2>Frequently Asked Questions</h2>
-                    </div>
-                    <div className={styles.faqGrid}>
-                        {FAQS.map((faq, index) => (
-                            <div key={index} className={styles.faqItem}>
-                                <h4>{faq.question}</h4>
-                                <p>{faq.answer}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* CTA */}
             <section className={styles.cta}>

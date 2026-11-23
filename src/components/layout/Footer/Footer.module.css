@@ -89,23 +89,89 @@
     color: var(--color-primary-500);
 }
 
-/* Cert Badges */
-.certBadges {
+/* Office Locations in Footer */
+.officeLocations {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    width: 100%;
 }
 
-.certBadge {
-    padding: var(--space-1) var(--space-2);
-    background: var(--color-gray-900);
-    border-radius: var(--radius-sm);
-    font-size: 0.65rem;
+.officeItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-xs);
+    line-height: var(--leading-relaxed);
+}
+
+.officeIcon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--color-primary-400);
+    margin-top: 2px;
+}
+
+.officeTitle {
+    display: block;
     font-weight: var(--font-semibold);
+    color: var(--color-gray-200);
+    margin-bottom: 2px;
+}
+
+.officeAddress {
     color: var(--color-gray-400);
-    border: 1px solid var(--color-gray-800);
+    margin: 0;
+}
+
+/* Government Recognition Badges */
+.recognitionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+}
+
+.recognitionLabel {
+    font-size: 0.7rem;
+    font-weight: var(--font-semibold);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    color: var(--color-gray-400);
+}
+
+.recognitionBadges {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.govLogoCard {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    height: 64px;
+}
+
+.govLogoCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.govLogoImg {
+    object-fit: contain;
+    height: 52px;
+    width: auto;
+    display: block;
 }
 
 /* Navigation Columns */
@@ -175,7 +241,7 @@
     .bottomContent {
         flex-direction: row;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: center;
         text-align: left;
     }
 }

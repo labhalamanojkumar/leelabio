@@ -5,8 +5,8 @@ import { SITE_CONFIG, COMPLIANCE_BADGES } from '@/lib/constants';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-    title: 'About Leela Biologics - Leading Biologics CDMO',
-    description: 'Learn about Leela Biologics, our mission, expert leadership team, world-class GMP manufacturing standards, and 25+ years of experience in accelerating biologics drug development.',
+    title: 'About Leelabiologics - Leading Biologics CDMO',
+    description: 'Learn about Leelabiologics, our mission, expert leadership team, world-class GMP manufacturing standards, and 20+ years of experience in accelerating biologics drug development.',
     keywords: [
         'biologics CDMO',
         'GMP manufacturing',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         'biologics leadership'
     ],
     openGraph: {
-        title: 'About Leela Biologics | Premier Biologics CDMO',
+        title: 'About Leelabiologics | Premier Biologics CDMO',
         description: 'Accelerating the future of biologics medicine through scientific excellence, rapid scale-up, and world-class GMP manufacturing.',
         type: 'website',
         url: `${SITE_CONFIG.url}/about`,
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
                 url: `${SITE_CONFIG.url}/images/quality-lab.png`,
                 width: 1200,
                 height: 630,
-                alt: 'Leela Biologics Quality Lab',
+                alt: 'Leelabiologics Quality Lab',
             },
         ],
     },
@@ -42,12 +42,12 @@ const LEADERSHIP_TEAM = [
         bio: 'Over 16 years of experience in biologics development and manufacturing leadership. Dr. Labala has spearheaded the development of over 20 novel biological entities and biosimilars.',
     },
     {
-        name: 'Pavani Nalla',
+        name: 'Mrs. Pavani Nalla',
         title: 'Co-founder and Chief Operating Officer',
         bio: 'Led regulatory submissions for 30+ INDs and 10+ commercial biologics products. Expertise in navigating complex FDA, EMA, and CDSCO regulatory pathways.',
     },
     {
-        name: 'Bhanu Bhalchandra',
+        name: 'Dr. Pournima',
         title: 'Chief Scientific Officer',
         bio: 'Extensive expertise in scientific operations and biologics development, specifically in downstream processing, protein characterization, and tech transfer methodologies.',
     },
@@ -57,7 +57,7 @@ export default function AboutPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'AboutPage',
-        name: 'About Leela Biologics',
+        name: 'About Leelabiologics',
         description: metadata.description,
         url: `${SITE_CONFIG.url}/about`,
         mainEntity: {
@@ -91,10 +91,10 @@ export default function AboutPage() {
                 <div className={styles.heroBackground}></div>
                 <div className={styles.container}>
                     <header className={styles.heroContent}>
-                        <span className={styles.badge}>About Leela Biologics</span>
+                        <span className={styles.badge}>About Leelabiologics</span>
                         <h1 id="about-hero-title" className={styles.heroTitle}>
                             Accelerating the Future of
-                            <span className={styles.accent}> Biologics Medicine</span>
+                            <span className={styles.accent}> Medicine</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
                             Driven by the spirit of &lsquo;Make in India&rsquo;, we transform breakthrough science into life-changing therapeutics. With an unwavering commitment to world-class manufacturing and scientific excellence, we deliver next-generation biologics that are not only innovative but also affordable and accessible&mdash;ensuring better health outcomes for patients worldwide.
@@ -142,7 +142,7 @@ export default function AboutPage() {
                             <div className={styles.missionImageWrapper}>
                                 <Image
                                     src="/images/team-collaboration.png"
-                                    alt="Leela Biologics team collaborating in a modern biotech office setting"
+                                    alt="Leelabiologics team collaborating in a modern biotech office setting"
                                     width={560}
                                     height={400}
                                     className={styles.missionImg}

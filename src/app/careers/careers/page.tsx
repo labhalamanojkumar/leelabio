@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SITE_CONFIG } from '@/lib/constants';
+import { JOB_OPENINGS } from '@/lib/jobs';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-    title: 'Careers in Biologics - Join Leela Biologics',
-    description: 'Join Leela Biologics and help build the future of biologics medicine. Explore careers in process development, manufacturing, quality control, and regulatory affairs.',
+    title: 'Careers in Biologics - Join Leelabiologics',
+    description: 'Join Leelabiologics and help build the future of biologics medicine. Explore careers in process development, manufacturing, quality control, and regulatory affairs.',
     keywords: [
         'biologics careers',
         'CDMO jobs',
@@ -26,16 +27,6 @@ export const metadata: Metadata = {
         canonical: `${SITE_CONFIG.url}/careers`,
     },
 };
-
-const JOB_OPENINGS = [
-    { id: '1', title: 'Senior Scientist, Process Development (Upstream)', department: 'R&D', location: 'Visakhapatnam, AP', type: 'Full-time', reqId: 'REQ-2024-001' },
-    { id: '2', title: 'Manufacturing Associate II, GMP Biologics', department: 'Operations', location: 'Visakhapatnam, AP', type: 'Full-time', reqId: 'REQ-2024-002' },
-    { id: '3', title: 'Quality Control Analyst (HPLC/Mass Spec)', department: 'Quality', location: 'Visakhapatnam, AP', type: 'Full-time', reqId: 'REQ-2024-003' },
-    { id: '4', title: 'Project Manager, CDMO Services', department: 'Program Management', location: 'Hybrid / Remote', type: 'Full-time', reqId: 'REQ-2024-004' },
-    { id: '5', title: 'Regulatory Affairs Specialist (CMC)', department: 'Regulatory', location: 'Visakhapatnam, AP', type: 'Full-time', reqId: 'REQ-2024-005' },
-    { id: '6', title: 'Cell Therapy Scientist (CAR-T / NK)', department: 'ATMP R&D', location: 'Visakhapatnam, AP', type: 'Full-time', reqId: 'REQ-2024-006' },
-    { id: '7', title: 'Formulation Scientist (LNP/mRNA)', department: 'Formulation', location: 'Visakhapatnam, AP', type: 'Full-time', reqId: 'REQ-2024-007' },
-];
 
 const BENEFITS = [
     { icon: '🏥', title: 'Health & Wellness', desc: 'Comprehensive medical, dental, and vision coverage for employees and dependents.' },
@@ -71,7 +62,7 @@ export default function CareersPage() {
             name: SITE_CONFIG.name,
             value: job.reqId
         },
-        description: `Join Leela Biologics as a ${job.title} in our ${job.department} department. Contribute to advancing life-saving biologic therapies.`
+        description: `Join Leelabiologics as a ${job.title} in our ${job.department} department. Contribute to advancing life-saving biologic therapies.`
     }));
 
     return (
@@ -108,9 +99,9 @@ export default function CareersPage() {
                 <div className={styles.container}>
                     <div className={styles.cultureGrid}>
                         <article className={styles.cultureContent}>
-                            <h2 id="culture-title">Why Leela Biologics?</h2>
+                            <h2 id="culture-title">Why Leelabiologics?</h2>
                             <p>
-                                At Leela Biologics, you won&apos;t just have a job—you&apos;ll build a highly specialized career at the forefront of the biologics CDMO industry. Our state-of-the-art facilities and diverse pipeline of complex modalities mean you will constantly be challenged and intellectually engaged.
+                                At Leelabiologics, you won&apos;t just have a job—you&apos;ll build a highly specialized career at the forefront of the biologics CDMO industry. Our state-of-the-art facilities and diverse pipeline of complex modalities mean you will constantly be challenged and intellectually engaged.
                             </p>
                             <p>
                                 We foster an inclusive culture built on scientific rigor, transparent collaboration, and continuous improvement. We believe that empowering our employees with the best tools, ongoing training, and a supportive environment directly translates to superior outcomes for our clients and, ultimately, the patients who depend on these therapies.

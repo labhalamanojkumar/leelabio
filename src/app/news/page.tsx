@@ -4,14 +4,14 @@ import styles from './page.module.css';
 
 export const metadata: Metadata = {
     title: 'News - Company Updates & Industry Insights',
-    description: 'Stay updated with the latest news from Leela biologics including company announcements, industry insights, and biologics development trends.',
+    description: 'Stay updated with the latest news from Leelabiologics including company announcements, industry insights, and biologics development trends.',
     keywords: ['biologics news', 'CDMO updates', 'biotech industry news', 'company announcements'],
 };
 
 const NEWS_ITEMS = [
     {
         id: '1',
-        title: 'Leela biologics Expands Manufacturing Capacity with New 2000L Bioreactor Suite',
+        title: 'Leelabiologics Expands Manufacturing Capacity with New 2000L Bioreactor Suite',
         date: '2024-12-01',
         category: 'Company News',
         summary: 'New manufacturing suite adds capacity for commercial-scale biologics production.',
@@ -32,7 +32,7 @@ const NEWS_ITEMS = [
     },
     {
         id: '4',
-        title: 'Leela biologics Presents at BIO International Convention',
+        title: 'Leelabiologics Presents at BIO International Convention',
         date: '2024-09-10',
         category: 'Events',
         summary: 'Our team presented on advances in mRNA manufacturing at BIO 2024.',

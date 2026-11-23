@@ -3,7 +3,7 @@ import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
     title: 'GMP/GLP Quality Statement',
-    description: 'Leela Biologics Private Limited quality statement outlining our GMP and GLP compliance, certifications, and commitment to quality.',
+    description: 'Leelabiologics quality statement outlining our GMP and GLP compliance, certifications, and commitment to quality.',
 };
 
 export default function GMPStatementPage() {
@@ -16,7 +16,7 @@ export default function GMPStatementPage() {
                 <section>
                     <h2>Our Commitment to Quality</h2>
                     <p>
-                        Leela Biologics Private Limited is committed to the highest standards of quality in all aspects
+                        Leelabiologics is committed to the highest standards of quality in all aspects
                         of our operations. We maintain rigorous quality management systems that comply
                         with current Good Manufacturing Practice (cGMP) and Good Laboratory Practice (GLP)
                         regulations.

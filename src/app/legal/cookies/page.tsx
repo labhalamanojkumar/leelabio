@@ -3,7 +3,7 @@ import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
     title: 'Cookie Policy',
-    description: 'Leela Biologics Private Limited cookie policy describing how we use cookies and similar technologies on our website.',
+    description: 'Leelabiologics cookie policy describing how we use cookies and similar technologies on our website.',
 };
 
 export default function CookiePolicyPage() {

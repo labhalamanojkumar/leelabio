@@ -1,23 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { JOB_OPENINGS } from '@/lib/jobs';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
     title: 'Careers - Join Our Team',
-    description: 'Join Leela biologics and be part of a team advancing next-generation biologics. View open positions in science, manufacturing, quality, and operations.',
+    description: 'Join Leelabiologics and be part of a team advancing next-generation biologics. View open positions in science, manufacturing, quality, and operations.',
     keywords: ['biologics careers', 'CDMO jobs', 'pharmaceutical careers', 'biotech jobs'],
 };
-
-const JOB_OPENINGS = [
-    { id: '1', title: 'Senior Scientist, Process Development', department: 'R&D', location: 'Leela Biologics Private Limited, Visakhapatnam, India', type: 'Full-time' },
-    { id: '2', title: 'Manufacturing Associate II', department: 'Operations', location: 'Leela Biologics Private Limited, Visakhapatnam, India', type: 'Full-time' },
-    { id: '3', title: 'Quality Control Analyst', department: 'Quality', location: 'Leela Biologics Private Limited, Visakhapatnam, India', type: 'Full-time' },
-    { id: '4', title: 'Project Manager, CDMO Services', department: 'Program Management', location: 'Remote / Hybrid', type: 'Full-time' },
-    { id: '5', title: 'Regulatory Affairs Specialist', department: 'Regulatory', location: 'Leela Biologics Private Limited, Visakhapatnam, India', type: 'Full-time' },
-    { id: '6', title: 'Cell Therapy Scientist', department: 'R&D', location: 'Leela Biologics Private Limited, Visakhapatnam, India', type: 'Full-time' },
-    { id: '7', title: 'Formulation Scientist', department: 'R&D', location: 'Leela Biologics Private Limited, Visakhapatnam, India', type: 'Full-time' },
-];
 
 const BENEFITS = [
     { icon: '🏥', title: 'Health & Wellness', desc: 'Comprehensive medical, dental, and vision coverage' },
@@ -53,9 +44,9 @@ export default function CareersPage() {
                 <div className={styles.container}>
                     <div className={styles.cultureGrid}>
                         <div className={styles.cultureContent}>
-                            <h2>Why Leela Biologics?</h2>
+                            <h2>Why Leelabiologics?</h2>
                             <p>
-                                At Leela Biologics, you&apos;ll work at the forefront of biologics
+                                At Leelabiologics, you&apos;ll work at the forefront of biologics
                                 innovation, collaborating with world-class scientists and
                                 contributing to therapies that transform lives.
                             </p>
@@ -66,12 +57,12 @@ export default function CareersPage() {
                             </p>
                         </div>
                         <div className={styles.cultureImage}>
-                            <Image 
-                                src="/images/team-collaboration.png" 
-                                alt="Diverse team of scientists collaborating in a biologics laboratory" 
-                                width={600} 
-                                height={400} 
-                                className={styles.cultureImg} 
+                            <Image
+                                src="/images/team-collaboration.png"
+                                alt="Diverse team of scientists collaborating in a biologics laboratory"
+                                width={600}
+                                height={400}
+                                className={styles.cultureImg}
                             />
                         </div>
                     </div>
@@ -105,16 +96,25 @@ export default function CareersPage() {
                                 <div className={styles.jobInfo}>
                                     <h3 className={styles.jobTitle}>{job.title}</h3>
                                     <div className={styles.jobMeta}>
-                                        <span>{job.department}</span>
+                                        <span style={{ fontWeight: 600, color: 'var(--color-primary-700)' }}>{job.department}</span>
                                         <span>•</span>
                                         <span>{job.location}</span>
                                         <span>•</span>
                                         <span>{job.type}</span>
+                                        <span>•</span>
+                                        <span style={{ fontSize: '12px', background: '#e0f2fe', color: '#0369a1', padding: '2px 6px', borderRadius: '4px' }}>
+                                            {job.reqId}
+                                        </span>
+                                    </div>
+                                    <div style={{ marginTop: '6px', fontSize: '13px', color: '#64748b' }}>
+                                        Direct Inquiries: <a href={`mailto:${job.email}?subject=Application for ${encodeURIComponent(job.title)} (${job.reqId})`} style={{ color: 'var(--color-primary-600)', fontWeight: 500 }}>{job.email}</a>
                                     </div>
                                 </div>
-                                <Link href={`/careers/${job.id}`} className={styles.applyBtn}>
-                                    View & Apply
-                                </Link>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '150px' }}>
+                                    <Link href={`/careers/${job.id}`} className={styles.applyBtn} style={{ textAlign: 'center' }}>
+                                        View & Apply
+                                    </Link>
+                                </div>
                             </div>
                         ))}
                     </div>

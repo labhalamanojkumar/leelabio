@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { MODALITIES, PROJECT_TIMELINES } from '@/lib/constants';
+import { MODALITIES, MODALITY_GROUPS, PROJECT_TIMELINES } from '@/lib/constants';
 import styles from './page.module.css';
 
 export default function ContactForm() {
@@ -132,12 +132,18 @@ export default function ContactForm() {
 
             <div className={styles.formGroup}>
                 <label htmlFor="modality" className={styles.label}>
-                    Primary Modality
+                    Primary Modality / Service Focus
                 </label>
                 <select id="modality" name="modality" className={styles.select} disabled={isSubmitting}>
-                    <option value="">Select modality...</option>
-                    {MODALITIES.map((modality) => (
-                        <option key={modality} value={modality}>{modality}</option>
+                    <option value="">Select primary modality / service division...</option>
+                    {MODALITY_GROUPS.map((group) => (
+                        <optgroup key={group.category} label={group.category}>
+                            {group.options.map((modality) => (
+                                <option key={modality} value={`${group.category} - ${modality}`}>
+                                    {modality}
+                                </option>
+                            ))}
+                        </optgroup>
                     ))}
                 </select>
             </div>
@@ -156,18 +162,22 @@ export default function ContactForm() {
 
             <div className={styles.formGroup}>
                 <label htmlFor="services" className={styles.label}>
-                    Capabilities Required
+                    Capabilities / Services Required
                 </label>
                 <div className={styles.checkboxGroup}>
                     {[
-                        'Cell Line Development',
-                        'Process Development',
-                        'Analytical Development',
-                        'Clinical Manufacturing',
-                        'Commercial Manufacturing',
-                        'Cell & Gene Therapy',
-                        'mRNA / Nucleic Acids',
-                        'Regulatory Support',
+                        'Biotechnology Products',
+                        'Pharmaceutical Products',
+                        'Cell & Gene Therapies',
+                        'Regenerative Medicine',
+                        'Medical Devices & IVD',
+                        'Bioprocess Consumables',
+                        'Animal Healthcare Products',
+                        'Process & Analytical Development',
+                        'Clinical & Commercial Manufacturing',
+                        'Sterile Fill-Finish & Lyophilization',
+                        'Regulatory Affairs, CER & PMS/PMCF',
+                        'Quality Control & Batch Release',
                     ].map((service) => (
                         <label key={service} className={styles.checkbox}>
                             <input type="checkbox" name="services" value={service} disabled={isSubmitting} />
@@ -196,7 +206,7 @@ export default function ContactForm() {
                 <label className={styles.checkboxSingle}>
                     <input type="checkbox" name="consent" required disabled={isSubmitting} />
                     <span>
-                        I agree to the <a href="/legal/privacy" style={{ color: 'var(--color-primary-600)' }}>Privacy Policy</a> and authorize Leela Biologics to process this data. <span className={styles.required}>*</span>
+                        I agree to the <a href="/legal/privacy" style={{ color: 'var(--color-primary-600)' }}>Privacy Policy</a> and authorize Leelabiologics to process this data. <span className={styles.required}>*</span>
                     </span>
                 </label>
             </div>

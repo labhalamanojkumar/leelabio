@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
-import { SERVICES, SITE_CONFIG } from '@/lib/constants';
+import { SERVICE_SECTIONS, SITE_CONFIG } from '@/lib/constants';
 import styles from './page.module.css';
 
 export default function HomePage() {
@@ -18,9 +18,10 @@ export default function HomePage() {
                 description: SITE_CONFIG.description,
                 address: {
                     '@type': 'PostalAddress',
-                    streetAddress: 'Plot No. 12, Phase II, Biotech Park',
-                    addressLocality: 'Genome Valley, Hyderabad',
-                    postalCode: '500078',
+                    streetAddress: '3rd Floor, World Trade Center (WTC), VM Steel Project S.O, Pragati Maidan, AIC-AMTZ Medi Valley Incubation Council, Andhra Pradesh MedTech Zone (AMTZ)',
+                    addressLocality: 'Visakhapatnam',
+                    addressRegion: 'Andhra Pradesh',
+                    postalCode: '530031',
                     addressCountry: 'IN'
                 },
                 contactPoint: {
@@ -60,51 +61,77 @@ export default function HomePage() {
                 <div className={`${styles.heroBackground} enterprise-gradient-bg`}>
                     <div className={styles.heroPattern}></div>
                 </div>
-                <div className={styles.heroContent}>
-                    <span className={styles.heroBadge}>
-                        <span className={styles.badgeDot}></span>
-                        Global Biotech Enterprise
-                    </span>
-                    <h1 className={styles.heroTitle} style={{ color: 'white' }}>
-                        Accelerating the Future of
-                        <span style={{ display: 'block', color: 'var(--color-secondary-100)' }}>Biologics Medicine</span>
-                    </h1>
-                    <p className={styles.heroSubtitle} style={{ color: 'rgba(255,255,255,0.9)' }}>
-                        A premier global CDMO empowering pharmaceutical innovators with world-class drug development, commercial manufacturing, and advanced analytical solutions for next-generation therapeutics.
-                    </p>
-                    <div className={styles.heroCtas}>
-                        <Link href="/contact" className={styles.ctaPrimary}>
-                            Partner With Us
-                            <svg viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                        </Link>
-                        <Link href="/solutions" className={styles.ctaSecondary}>
-                            Explore Solutions
-                        </Link>
+
+                <div className={styles.heroContainer}>
+                    {/* Horizontal Headline spanning across window */}
+                    <div className={styles.heroHeader}>
+                        <span className={styles.heroBadge}>
+                            <span className={styles.badgeDot}></span>
+                            Global Biotech Enterprise
+                        </span>
+                        <h1 className={styles.heroTitle} style={{ color: 'white' }}>
+                            Accelerating the Future of{' '}
+                            <span style={{ color: 'var(--color-secondary-100)' }}>Medicine</span>
+                        </h1>
                     </div>
-                    <div className={styles.heroTrust}>
-                        <span className={styles.trustLabel} style={{ color: 'rgba(255,255,255,0.7)' }}>Trusted by leading biopharma innovators worldwide</span>
-                    </div>
-                </div>
-                <div className={styles.heroVisual}>
-                    <div className={styles.heroImageWrapper}>
-                        <Image
-                            src="/images/hero-patient.png"
-                            alt="Advanced biologics facility operations representing global manufacturing scale"
-                            width={600}
-                            height={450}
-                            className={styles.heroImage}
-                            priority
-                        />
-                    </div>
-                    <div className={`${styles.heroCardSmall} glass-panel`}>
-                        <span className={styles.heroCardSmallIcon}>✓</span>
-                        <span style={{ color: 'var(--color-gray-900)'}}>FDA & EMA Ready Facilities</span>
-                    </div>
-                    <div className={`${styles.heroCardSmall} glass-panel`} style={{ animationDelay: '0.2s' }}>
-                        <span className={styles.heroCardSmallIcon}>✓</span>
-                        <span style={{ color: 'var(--color-gray-900)'}}>Commercial Scale Supply</span>
+
+                    <div className={styles.heroBody}>
+                        <div className={styles.heroContent}>
+                            <div className={styles.heroDescription}>
+                                <p className={styles.heroSubtitle}>
+                                    A next-generation drug discovery company integrated with comprehensive Contract Development and Manufacturing Organization (CDMO) capabilities. Our advanced Artificial Intelligence (AI) and Machine Learning (ML) platforms accelerate target identification, lead discovery, molecular design, and candidate optimization, enabling faster and more efficient development of innovative therapeutics.
+                                </p>
+                                <p className={styles.heroSubtitle}>
+                                    Our end-to-end service portfolio spans the entire pharmaceutical and biopharmaceutical value chain, including drug discovery, research services, process development, analytical development, clinical manufacturing, regulatory support, technology transfer, commercial-scale production, and lifecycle management. We partner with biotechnology, pharmaceutical, and healthcare companies to transform scientific innovation into commercially successful therapies.
+                                </p>
+                                <p className={styles.heroSubtitle}>
+                                    Leveraging cutting-edge computational biology, AI-driven predictive modeling, advanced manufacturing technologies, and deep regulatory expertise, we support the drug discovery, product development and commercialization of small molecules, biologics, biosimilars, Antibody drug conjugates, peptides, oligonucleotides, cell and gene therapies, and other next-generation therapeutic modalities.
+                                </p>
+                            </div>
+                            <div className={styles.heroCtas}>
+                                <Link href="/contact" className={styles.ctaPrimary}>
+                                    Partner With Us
+                                    <svg viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </Link>
+                                <Link href="/solutions" className={styles.ctaSecondary}>
+                                    Explore Solutions
+                                </Link>
+                            </div>
+                            <div className={styles.heroTrust}>
+                                <span className={styles.trustLabel} style={{ color: 'rgba(255,255,255,0.7)' }}>Trusted by leading biopharma innovators worldwide</span>
+                            </div>
+                        </div>
+
+                        <div className={styles.heroVisual}>
+                            <div className={styles.heroImageWrapper}>
+                                <Image
+                                    src="/images/biopharma-hero-realistic.jpg"
+                                    alt="Advanced drug discovery laboratory and biopharmaceutical manufacturing facility"
+                                    width={600}
+                                    height={400}
+                                    className={styles.heroImage}
+                                    priority
+                                />
+                            </div>
+                            <div className={`${styles.heroCardSmall} glass-panel`}>
+                                <span className={styles.heroCardSmallIcon}>
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 12, height: 12 }}>
+                                        <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                                    </svg>
+                                </span>
+                                <span style={{ color: 'var(--color-gray-900)'}}>Partnership with external manufacturing facilities approved by FDA/EMA/MHRA</span>
+                            </div>
+                            <div className={`${styles.heroCardSmall} glass-panel`} style={{ animationDelay: '0.2s' }}>
+                                <span className={styles.heroCardSmallIcon}>
+                                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 12, height: 12 }}>
+                                        <polyline points="3.5 8.5 6.5 11.5 12.5 4.5" />
+                                    </svg>
+                                </span>
+                                <span style={{ color: 'var(--color-gray-900)'}}>Commercial Scale Supply</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -114,20 +141,16 @@ export default function HomePage() {
                 <div className={styles.container}>
                     <div className={styles.statsGrid}>
                         <div className={styles.statItem}>
-                            <span className={styles.statValue}>25+</span>
+                            <span className={styles.statValue}>20+</span>
                             <span className={styles.statLabel}>Years of Scientific Excellence</span>
                         </div>
                         <div className={styles.statItem}>
-                            <span className={styles.statValue}>500+</span>
+                            <span className={styles.statValue}>10+</span>
                             <span className={styles.statLabel}>Global Biopharma Partners</span>
                         </div>
                         <div className={styles.statItem}>
-                            <span className={styles.statValue}>12+</span>
-                            <span className={styles.statLabel}>Commercial Approvals Supported</span>
-                        </div>
-                        <div className={styles.statItem}>
-                            <span className={styles.statValue}>Global</span>
-                            <span className={styles.statLabel}>Supply Chain Network</span>
+                            <span className={styles.statValue}>AI/ML</span>
+                            <span className={styles.statLabel}>Integrated Drug Discovery Platforms</span>
                         </div>
                     </div>
                 </div>
@@ -139,33 +162,72 @@ export default function HomePage() {
                     <div className={styles.sectionHeader}>
                         <span className={styles.sectionLabel}>Enterprise Capabilities</span>
                         <h2 className={styles.sectionTitle}>
-                            End-to-End Biologics Solutions
+                            Core Industry Services & Solutions
                         </h2>
                         <p className={styles.sectionSubtitle}>
-                            From cell line development to commercial manufacturing, our global network provides fully integrated capabilities to de-risk your development and accelerate time-to-market.
+                            Specialized, cGMP-compliant research, development, commercial manufacturing, and regulatory services delivered across 7 core industry sectors.
                         </p>
                     </div>
                     <div className={styles.servicesGrid}>
-                        {SERVICES.map((service, index) => (
-                            <Link
-                                href={`/solutions/${service.slug}`}
-                                key={service.id}
-                                className={styles.serviceCard}
-                                style={{ animationDelay: `${index * 0.1}s` }}
-                            >
-                                <div className={styles.serviceIcon}>
-                                    {getServiceIcon(service.icon)}
+                        {SERVICE_SECTIONS.map((section, index) => {
+                            const servicesList = section.secondaryServices || section.subsections.map((sub) => ({
+                                label: sub.title,
+                                href: `/solutions/${sub.slug}`,
+                            }));
+                            return (
+                                <div
+                                    key={section.id}
+                                    className={styles.serviceCard}
+                                    style={{ animationDelay: `${index * 0.08}s` }}
+                                >
+                                    <Link href={`/solutions/${section.slug}`} className={styles.serviceCardTopLink}>
+                                        <div className={styles.serviceIcon}>
+                                            {getServiceIcon(section.icon)}
+                                        </div>
+                                        <h3 className={styles.serviceTitle}>{section.title}</h3>
+                                        <p className={styles.serviceDescription}>{section.shortDescription}</p>
+                                    </Link>
+
+                                    {/* Additional dropdown for each section listing down briefly the services */}
+                                    <details className={styles.sectionServicesDropdown}>
+                                        <summary className={styles.sectionServicesSummary}>
+                                            <span className={styles.sectionServicesSummaryText}>
+                                                <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                                                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                                                </svg>
+                                                View Services ({servicesList.length})
+                                            </span>
+                                            <svg className={styles.dropdownChevronIcon} viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </summary>
+                                        <div className={styles.sectionServicesList}>
+                                            {servicesList.map((svc) => (
+                                                <Link
+                                                    key={svc.label}
+                                                    href={svc.href}
+                                                    className={styles.sectionServiceItem}
+                                                >
+                                                    <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12">
+                                                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                    </svg>
+                                                    <span>{svc.label}</span>
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </details>
+
+                                    <div className={styles.serviceCardAction}>
+                                        <Link href={`/solutions/${section.slug}`} className={styles.serviceLink}>
+                                            Explore {section.title}
+                                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        </Link>
+                                    </div>
                                 </div>
-                                <h3 className={styles.serviceTitle}>{service.title}</h3>
-                                <p className={styles.serviceDescription}>{service.shortDescription}</p>
-                                <span className={styles.serviceLink}>
-                                    Learn more
-                                    <svg viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                                    </svg>
-                                </span>
-                            </Link>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>

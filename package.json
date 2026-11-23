@@ -10,6 +10,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@next/swc-win32-x64-msvc": "^14.2.33",
     "next": "^14.2.0",
     "nodemailer": "^8.0.10",
     "react": "^18.3.0",

@@ -5,8 +5,8 @@ import styles from './page.module.css';
 import ContactForm from './ContactForm';
 
 export const metadata: Metadata = {
-    title: 'Global Contact & Alliance Management | Leela Biologics CDMO',
-    description: 'Partner with Leela Biologics. Contact our global business development team to discuss enterprise CDMO solutions, request an RFP, or schedule an executive consultation.',
+    title: 'Global Contact & Alliance Management | Leelabiologics CDMO',
+    description: 'Partner with Leelabiologics. Contact our global business development team to discuss enterprise CDMO solutions, request an RFP, or schedule an executive consultation.',
     keywords: ['contact biologics CDMO', 'global CDMO alliance', 'RFP biologics manufacturing', 'enterprise biotech partnership'],
 };
 
@@ -14,12 +14,12 @@ export default function ContactPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'ContactPage',
-        name: 'Contact Leela Biologics - Global CDMO',
+        name: 'Contact Leelabiologics - Global CDMO',
         description: 'Contact information for global business development and alliance management.',
         url: `${SITE_CONFIG.url}/contact`,
         mainEntity: {
             '@type': 'Organization',
-            name: 'Leela Biologics',
+            name: 'Leelabiologics',
             contactPoint: [
                 {
                     '@type': 'ContactPoint',
@@ -33,14 +33,26 @@ export default function ContactPage() {
             location: [
                 {
                     '@type': 'Place',
-                    name: 'Global Headquarters & Manufacturing Center',
+                    name: 'Corporate Office - AMTZ Medi Valley',
                     address: {
                         '@type': 'PostalAddress',
-                        streetAddress: SITE_CONFIG.address.street,
-                        addressLocality: SITE_CONFIG.address.city,
-                        addressRegion: SITE_CONFIG.address.state,
-                        postalCode: SITE_CONFIG.address.zip,
-                        addressCountry: SITE_CONFIG.address.country
+                        streetAddress: '3rd Floor, World Trade Center (WTC), VM Steel Project S.O, Pragati Maidan, AIC-AMTZ Medi Valley Incubation Council, Andhra Pradesh MedTech Zone (AMTZ)',
+                        addressLocality: 'Visakhapatnam',
+                        addressRegion: 'Andhra Pradesh',
+                        postalCode: '530031',
+                        addressCountry: 'IN'
+                    }
+                },
+                {
+                    '@type': 'Place',
+                    name: 'Registered Office',
+                    address: {
+                        '@type': 'PostalAddress',
+                        streetAddress: 'Balaji Nagar, Pendurthi',
+                        addressLocality: 'Visakhapatnam',
+                        addressRegion: 'Andhra Pradesh',
+                        postalCode: '531171',
+                        addressCountry: 'IN'
                     }
                 }
             ]
@@ -64,7 +76,7 @@ export default function ContactPage() {
                         <span className={styles.accent} style={{ display: 'block', color: 'var(--color-secondary-100)' }}> Global Commercialization Strategy</span>
                     </h1>
                     <p className={styles.heroSubtitle} style={{ color: 'rgba(255,255,255,0.9)', maxWidth: '800px' }}>
-                        Connect with our executive business development team to discuss capacity reservations, strategic partnerships, and end-to-end CDMO solutions for your critical biologics pipeline.
+                        Connect with our executive business development team to discuss capacity reservations, strategic partnerships, and end-to-end CRDMO solutions across our specialized healthcare and biopharma divisions.
                     </p>
                 </div>
             </section>
@@ -108,13 +120,24 @@ export default function ContactPage() {
                             </div>
 
                             <div className={`${styles.infoCard} glass-panel`}>
-                                <h3>Global Headquarters</h3>
-                                <address className={styles.address}>
-                                    <strong>Leela Biologics Campus</strong><br />
-                                    {SITE_CONFIG.address.street}<br />
-                                    {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.zip}<br />
-                                    {SITE_CONFIG.address.country}
-                                </address>
+                                <h3>Offices & Facilities</h3>
+                                <div style={{ marginBottom: '16px' }}>
+                                    <strong style={{ color: 'var(--color-primary-700)', display: 'block', marginBottom: '4px', fontSize: '13px' }}>
+                                        Registered office:
+                                    </strong>
+                                    <address className={styles.address} style={{ fontStyle: 'normal', fontSize: '13px', lineHeight: '1.5' }}>
+                                        Leelabiologics Private Limited, Balaji Nagar, Pendurthi<br />
+                                        Visakhapatnam-531171, Andhra Pradesh, India
+                                    </address>
+                                </div>
+                                <div style={{ borderTop: '1px solid var(--color-gray-200)', paddingTop: '16px' }}>
+                                    <strong style={{ color: 'var(--color-primary-700)', display: 'block', marginBottom: '4px', fontSize: '13px' }}>
+                                        Corporate office:
+                                    </strong>
+                                    <address className={styles.address} style={{ fontStyle: 'normal', fontSize: '13px', lineHeight: '1.5' }}>
+                                        Leelabiologics Private Limited, 3rd Floor, World Trade Center (WTC), VM Steel Project S.O, Pragati Maidan, AIC-AMTZ Medi Valley Incubation Council, Andhra Pradesh MedTech Zone (AMTZ), Visakhapatnam-530031, Andhra Pradesh, India
+                                    </address>
+                                </div>
                             </div>
 
                             <div className={`${styles.infoCard} glass-panel`}>

@@ -3,7 +3,7 @@ import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
     title: 'Terms of Service',
-    description: 'Leela Biologics Private Limited terms of service outlining the terms and conditions for using our website and services.',
+    description: 'Leelabiologics terms of service outlining the terms and conditions for using our website and services.',
 };
 
 export default function TermsPage() {
@@ -16,7 +16,7 @@ export default function TermsPage() {
                 <section>
                     <h2>1. Acceptance of Terms</h2>
                     <p>
-                        By accessing or using the Leela Biologics Private Limited website (&quot;Site&quot;) or services,
+                        By accessing or using the Leelabiologics website (&quot;Site&quot;) or services,
                         you agree to be bound by these Terms of Service. If you do not agree to
                         these terms, please do not use our Site or services.
                     </p>
@@ -25,7 +25,7 @@ export default function TermsPage() {
                 <section>
                     <h2>2. Services Description</h2>
                     <p>
-                        Leela Biologics Private Limited provides contract development and manufacturing services for
+                        Leelabiologics provides contract development and manufacturing services for
                         biologics, including but not limited to cell line development, process
                         development, analytical services, and GMP manufacturing. Specific services
                         are subject to separate written agreements.
@@ -36,7 +36,7 @@ export default function TermsPage() {
                     <h2>3. Intellectual Property</h2>
                     <p>
                         All content on this Site, including text, graphics, logos, images, and
-                        software, is the property of Leela Biologics Private Limited or its licensors and is
+                        software, is the property of Leelabiologics or its licensors and is
                         protected by intellectual property laws. You may not reproduce, modify,
                         or distribute any content without our written permission.
                     </p>
@@ -56,7 +56,7 @@ export default function TermsPage() {
                     <h2>5. Limitation of Liability</h2>
                     <p>
                         This Site and its content are provided &quot;as is&quot; without warranties of any kind.
-                        Leela Biologics Private Limited shall not be liable for any damages arising from your use of
+                        Leelabiologics shall not be liable for any damages arising from your use of
                         the Site or reliance on any information provided herein.
                     </p>
                 </section>

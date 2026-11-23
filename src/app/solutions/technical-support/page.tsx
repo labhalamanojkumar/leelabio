@@ -130,26 +130,6 @@ export default function TechnicalSupportPage() {
                 </div>
             </section>
 
-            <section className={styles.faq}>
-                <div className={styles.container}>
-                    <div className={styles.sectionHeader}>
-                        <h2>Frequently Asked Questions</h2>
-                    </div>
-                    <div className={styles.faqGrid}>
-                        {[
-                            { question: 'What types of problems do you help solve?', answer: 'We support a wide range of challenges including low titers, aggregation issues, purification bottlenecks, tech transfer failures, regulatory questions, and strategic program decisions.' },
-                            { question: 'How quickly can you mobilize?', answer: 'For urgent issues, we can often begin within 1-2 weeks. For planned engagements, we typically start within 3-4 weeks of contract execution.' },
-                            { question: 'Can consultants work on-site?', answer: 'Yes, we offer embedded consulting arrangements where our experts work on-site at your facility for extended periods.' },
-                            { question: 'What modalities do you cover?', answer: 'Our consultants have expertise across mAbs, bispecifics, ADCs, cell therapies, gene therapies, and mRNA/nucleic acid therapeutics.' },
-                        ].map((faq, index) => (
-                            <div key={index} className={styles.faqItem}>
-                                <h4>{faq.question}</h4>
-                                <p>{faq.answer}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             <section className={styles.cta}>
                 <div className={styles.container}>

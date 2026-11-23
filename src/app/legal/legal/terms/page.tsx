@@ -3,18 +3,18 @@ import { SITE_CONFIG } from '@/lib/constants';
 import styles from '../legal.module.css';
 
 export const metadata: Metadata = {
-    title: 'Terms of Service | Leela Biologics',
-    description: 'Leela Biologics Private Limited terms of service detailing website usage, intellectual property, confidentiality agreements (CDAs), and liability.',
+    title: 'Terms of Service | Leelabiologics',
+    description: 'Leelabiologics terms of service detailing website usage, intellectual property, confidentiality agreements (CDAs), and liability.',
     keywords: [
         'terms of service',
         'CDMO terms',
-        'Leela Biologics legal',
+        'Leelabiologics legal',
         'intellectual property protection',
         'confidentiality agreement'
     ],
     openGraph: {
-        title: 'Terms of Service | Leela Biologics',
-        description: 'Terms and conditions for using the Leela Biologics website and services.',
+        title: 'Terms of Service | Leelabiologics',
+        description: 'Terms and conditions for using the Leelabiologics website and services.',
         type: 'website',
         url: `${SITE_CONFIG.url}/legal/terms`,
     },
@@ -27,7 +27,7 @@ export default function TermsPage() {
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'Terms of Service - Leela Biologics',
+        name: 'Terms of Service - Leelabiologics',
         description: metadata.description,
         url: `${SITE_CONFIG.url}/legal/terms`,
     };
@@ -48,7 +48,7 @@ export default function TermsPage() {
                     <section>
                         <h2>1. Acceptance of Terms</h2>
                         <p>
-                            By accessing or using the Leela Biologics Private Limited website (&quot;Site&quot;) or digital services,
+                            By accessing or using the Leelabiologics website (&quot;Site&quot;) or digital services,
                             you agree to be bound by these Terms of Service. If you do not agree to
                             these terms, please immediately cease use of our Site. These terms govern website usage only; actual CDMO services are governed by separate Master Services Agreements (MSAs).
                         </p>
@@ -57,7 +57,7 @@ export default function TermsPage() {
                     <section>
                         <h2>2. Services Description & Scope</h2>
                         <p>
-                            Leela Biologics Private Limited provides advanced contract development and manufacturing (CDMO) services for
+                            Leelabiologics provides advanced contract development and manufacturing (CDMO) services for
                             biologics, including cell line development, upstream/downstream process development, analytical characterization, and cGMP manufacturing. 
                             Information on this Site is for general informational purposes and does not constitute a binding offer to perform services. Specific service engagements are subject to separate, formally executed written agreements (such as Proposals, Statements of Work, and MSAs).
                         </p>
@@ -66,7 +66,7 @@ export default function TermsPage() {
                     <section>
                         <h2>3. Intellectual Property Rights</h2>
                         <p>
-                            All content present on this Site, including but not limited to text, scientific graphics, logos, images, UI design, and underlying software, is the exclusive property of Leela Biologics Private Limited or its licensors, and is protected by international copyright, trademark, and intellectual property laws.
+                            All content present on this Site, including but not limited to text, scientific graphics, logos, images, UI design, and underlying software, is the exclusive property of Leelabiologics or its licensors, and is protected by international copyright, trademark, and intellectual property laws.
                         </p>
                         <p>
                             You may not reproduce, reverse-engineer, distribute, or create derivative works from any Site content without express written permission from our Legal department.
@@ -87,7 +87,7 @@ export default function TermsPage() {
                         <h2>5. Limitation of Liability</h2>
                         <p>
                             This Site and its content are provided on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind, either express or implied, including warranties of merchantability or fitness for a particular purpose.
-                            Leela Biologics Private Limited shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the Site, reliance on any scientific or technical information provided herein, or inability to access the Site.
+                            Leelabiologics shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the Site, reliance on any scientific or technical information provided herein, or inability to access the Site.
                         </p>
                     </section>
 
@@ -118,7 +118,8 @@ export default function TermsPage() {
                             For legal inquiries regarding these Terms of Service or to request a CDA, please contact us at:
                             <br /><br />
                             <strong>Email:</strong> legal@leelabiologics.com<br />
-                            <strong>Address:</strong> Leela Biologics Private Limited, Balaji Nagar, Pendurthi, Visakhapatnam, Andhra Pradesh 531171, India
+                            <strong>Registered Office:</strong> Leelabiologics, Balaji Nagar, Pendurthi, Visakhapatnam-531171, Andhra Pradesh, India<br />
+                            <strong>Corporate Office:</strong> Leelabiologics, 3rd Floor, World Trade Center (WTC), VM Steel Project S.O, Pragati Maidan, AIC-AMTZ Medi Valley Incubation Council, Andhra Pradesh MedTech Zone (AMTZ), Visakhapatnam-530031, Andhra Pradesh, India
                         </p>
                     </section>
                 </article>

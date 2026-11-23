@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { SITE_CONFIG, NAVIGATION, COMPLIANCE_BADGES } from '@/lib/constants';
+import { SITE_CONFIG, NAVIGATION } from '@/lib/constants';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -40,12 +40,57 @@ export default function Footer() {
                                 </a>
                             </div>
 
-                            <div className={styles.certBadges}>
-                                {COMPLIANCE_BADGES.slice(0, 4).map((badge, index) => (
-                                    <span key={index} className={styles.certBadge} title={badge.label}>
-                                        {badge.label}
-                                    </span>
-                                ))}
+                            <div className={styles.officeLocations}>
+                                <div className={styles.officeItem}>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.officeIcon}>
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    <div>
+                                        <strong className={styles.officeTitle}>Registered office:</strong>
+                                        <p className={styles.officeAddress}>
+                                            Leelabiologics Private Limited, Balaji Nagar, Pendurthi<br />
+                                            Visakhapatnam-531171, Andhra Pradesh, India
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className={styles.officeItem}>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={styles.officeIcon}>
+                                        <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                    <div>
+                                        <strong className={styles.officeTitle}>Corporate office:</strong>
+                                        <p className={styles.officeAddress}>
+                                            Leelabiologics Private Limited, 3rd Floor, World Trade Center (WTC), VM Steel Project S.O, Pragati Maidan, AIC-AMTZ Medi Valley Incubation Council, Andhra Pradesh MedTech Zone (AMTZ), Visakhapatnam-530031, Andhra Pradesh, India
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Government Recognitions */}
+                            <div className={styles.recognitionContainer}>
+                                <span className={styles.recognitionLabel}>Recognized By</span>
+                                <div className={styles.recognitionBadges}>
+                                    <div className={styles.govLogoCard} title="MSME - Ministry of Micro, Small & Medium Enterprises, Government of India">
+                                        <Image
+                                            src="/images/msme-logo.png"
+                                            alt="MSME - Ministry of Micro, Small & Medium Enterprises, Government of India"
+                                            width={65}
+                                            height={60}
+                                            className={styles.govLogoImg}
+                                        />
+                                    </div>
+
+                                    <div className={styles.govLogoCard} title="Recognised by DPIIT - Department for Promotion of Industry and Internal Trade, Government of India">
+                                        <Image
+                                            src="/images/dpiit-logo.png"
+                                            alt="Recognised by DPIIT - Department for Promotion of Industry and Internal Trade, Government of India"
+                                            width={65}
+                                            height={56}
+                                            className={styles.govLogoImg}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -106,14 +151,9 @@ export default function Footer() {
             <div className={styles.bottomSection}>
                 <div className={styles.container}>
                     <div className={styles.bottomContent}>
-                        <div className={styles.copyrightGroup}>
-                            <p className={styles.copyright}>
-                                © {currentYear} {SITE_CONFIG.name}. All rights reserved.
-                            </p>
-                            <p className={styles.address}>
-                                {SITE_CONFIG.address.street}, {SITE_CONFIG.address.city}, {SITE_CONFIG.address.state} {SITE_CONFIG.address.zip}
-                            </p>
-                        </div>
+                        <p className={styles.copyright}>
+                            © {currentYear} {SITE_CONFIG.name}. All rights reserved.
+                        </p>
                         
                         <div className={styles.social}>
                             <a href={SITE_CONFIG.social.twitter} target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Twitter">

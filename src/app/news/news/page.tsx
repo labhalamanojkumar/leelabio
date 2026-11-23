@@ -4,17 +4,17 @@ import { SITE_CONFIG } from '@/lib/constants';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-    title: 'Biologics News & Industry Insights | Leela Biologics',
-    description: 'Read the latest press releases, company announcements, and expert insights on biologics CDMO trends, GMP manufacturing, and cell & gene therapy from Leela Biologics.',
+    title: 'Biologics News & Industry Insights | Leelabiologics',
+    description: 'Read the latest press releases, company announcements, and expert insights on biologics CDMO trends, GMP manufacturing, and cell & gene therapy from Leelabiologics.',
     keywords: [
         'biologics news',
         'CDMO updates',
         'biotech industry news',
         'GMP manufacturing press release',
-        'Leela Biologics announcements'
+        'Leelabiologics announcements'
     ],
     openGraph: {
-        title: 'Leela Biologics News & Insights',
+        title: 'Leelabiologics News & Insights',
         description: 'Stay updated with the latest in biologics manufacturing, company milestones, and industry trends.',
         type: 'website',
         url: `${SITE_CONFIG.url}/news`,
@@ -27,10 +27,10 @@ export const metadata: Metadata = {
 const NEWS_ITEMS = [
     {
         id: '1',
-        title: 'Leela Biologics Expands Commercial Manufacturing Capacity with New 2000L SUB Suite',
+        title: 'Leelabiologics Expands Commercial Manufacturing Capacity with New 2000L SUB Suite',
         date: '2024-12-01',
         category: 'Company Expansion',
-        summary: 'To meet growing global demand for mammalian-expressed biologics, Leela Biologics has successfully commissioned a new cGMP suite featuring dual 2000L Single-Use Bioreactors (SUBs).',
+        summary: 'To meet growing global demand for mammalian-expressed biologics, Leelabiologics has successfully commissioned a new cGMP suite featuring dual 2000L Single-Use Bioreactors (SUBs).',
     },
     {
         id: '2',
@@ -48,7 +48,7 @@ const NEWS_ITEMS = [
     },
     {
         id: '4',
-        title: 'Leela Biologics Presents Novel LNP Formulation Strategies at BIO International 2024',
+        title: 'Leelabiologics Presents Novel LNP Formulation Strategies at BIO International 2024',
         date: '2024-09-10',
         category: 'Events & Conferences',
         summary: 'Our Chief Scientific Officer presented breakthrough data on improving mRNA stability via advanced microfluidic LNP formulation techniques at BIO 2024.',
@@ -140,7 +140,7 @@ export default function NewsPage() {
             <section className={styles.newsletter} aria-labelledby="newsletter-title">
                 <div className={styles.container}>
                     <aside className={styles.newsletterCard}>
-                        <h2 id="newsletter-title">Subscribe to the Leela Biologics Newsletter</h2>
+                        <h2 id="newsletter-title">Subscribe to the Leelabiologics Newsletter</h2>
                         <p>Receive bi-monthly updates on CDMO capacity, whitepapers, and regulatory insights directly to your inbox.</p>
                         <form className={styles.newsletterForm}>
                             <label htmlFor="email-input" className="sr-only">Email Address</label>
