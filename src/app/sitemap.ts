@@ -1,8 +1,11 @@
 import { MetadataRoute } from 'next';
+import { getAdminData } from '@/lib/data-store';
 
 const BASE_URL = 'https://leelabiologics.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const currentDate = new Date().toISOString();
 
     // Core pages
@@ -45,7 +48,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
 
     // Combine all pages
-    const allPages = [...corePages, ...solutionPages, ...legalPages];
+    const { jobs } = await getAdminData();
+    const jobPages = jobs.map((job) => ({
+        url: `/careers/${job.slug}`,
+        priority: 0.6,
+        changeFrequency: 'weekly' as const,
+    }));
+    const allPages = [...corePages, ...solutionPages, ...legalPages, ...jobPages];
 
     return allPages.map(page => ({
         url: `${BASE_URL}${page.url}`,

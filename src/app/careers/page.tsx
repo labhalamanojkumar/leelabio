@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { JOB_OPENINGS } from '@/lib/jobs';
+import { getAdminData } from '@/lib/data-store';
 import styles from './page.module.css';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
     title: 'Careers - Join Our Team',
@@ -19,7 +21,8 @@ const BENEFITS = [
     { icon: '📈', title: 'Growth Opportunities', desc: 'Clear career paths and internal mobility' },
 ];
 
-export default function CareersPage() {
+export default async function CareersPage() {
+    const { jobs } = await getAdminData();
     return (
         <>
             <section className={styles.hero}>
@@ -91,7 +94,7 @@ export default function CareersPage() {
                         Explore current opportunities and find your next role.
                     </p>
                     <div className={styles.jobList}>
-                        {JOB_OPENINGS.map((job) => (
+                        {jobs.map((job) => (
                             <div key={job.id} className={styles.jobCard}>
                                 <div className={styles.jobInfo}>
                                     <h3 className={styles.jobTitle}>{job.title}</h3>

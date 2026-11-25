@@ -8,14 +8,17 @@ export default function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
+    const [emailWarning, setEmailWarning] = useState('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const form = e.currentTarget;
         setIsSubmitting(true);
         setStatus('idle');
         setErrorMessage('');
+        setEmailWarning('');
 
-        const formData = new FormData(e.currentTarget);
+        const formData = new FormData(form);
         const services = formData.getAll('services');
         
         const data = {
@@ -40,16 +43,23 @@ export default function ContactForm() {
                 body: JSON.stringify(data),
             });
 
+            const result = await res.json();
+            if (result.saved) {
+                setEmailWarning(result.warning || 'Your inquiry was saved, but the notification email could not be sent.');
+                setStatus('success');
+                form.reset();
+                return;
+            }
             if (!res.ok) {
-                throw new Error('Failed to send message');
+                throw new Error(result.error || 'Failed to send message');
             }
 
             setStatus('success');
-            (e.target as HTMLFormElement).reset();
-        } catch (error: any) {
+            form.reset();
+        } catch (error) {
             console.error('Submission error:', error);
             setStatus('error');
-            setErrorMessage(error.message || 'Something went wrong. Please try again.');
+            setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
@@ -62,12 +72,17 @@ export default function ContactForm() {
                     <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
-                <h3 style={{ color: '#166534', fontSize: '24px', marginBottom: '16px' }}>RFP Submitted Successfully</h3>
+                <h3 style={{ color: '#166534', fontSize: '24px', marginBottom: '16px' }}>Inquiry Received</h3>
                 <p style={{ color: '#15803d', marginBottom: '24px' }}>
-                    Thank you for reaching out. Your request has been securely sent to our business development team. A senior alliance manager will contact you within 24 business hours.
+                    Thank you for reaching out. Your inquiry has been saved for our business development team. A senior alliance manager will contact you within 24 business hours.
                 </p>
+                {emailWarning && (
+                    <p role="status" style={{ color: '#854d0e', background: '#fef3c7', border: '1px solid #fcd34d', borderRadius: '8px', padding: '12px 16px', marginBottom: '24px' }}>
+                        {emailWarning}
+                    </p>
+                )}
                 <button 
-                    onClick={() => setStatus('idle')}
+                    onClick={() => { setStatus('idle'); setEmailWarning(''); }}
                     className={styles.submitButton}
                     style={{ background: 'var(--color-primary-600)', padding: '10px 24px', fontSize: '16px' }}
                 >

@@ -23,8 +23,12 @@ yarn-debug.log*
 yarn-error.log*
 
 # Local env files
-.env*.local
-.env
+.env*
+!.env.example
+!.env.postgres.example
+
+# Local admin leads and career openings
+.data/
 
 # Vercel
 .vercel

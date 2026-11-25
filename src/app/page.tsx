@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Script from 'next/script';
+import type { JSX } from 'react';
 import { SERVICE_SECTIONS, SITE_CONFIG } from '@/lib/constants';
 import styles from './page.module.css';
 

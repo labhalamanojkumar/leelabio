@@ -1,157 +1,222 @@
+import { randomUUID } from 'node:crypto';
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import {
+    createCareerApplication,
+    getCareerJob,
+    setCareerApplicationEmailStatus,
+    type CareerApplication,
+} from '@/lib/data-store';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const CAREERS_EMAIL = 'careers@leelabiologics.com';
+const MAX_RESUME_SIZE = 10 * 1024 * 1024;
+const resumeTypes: Record<string, string> = {
+    pdf: 'application/pdf',
+    doc: 'application/msword',
+    docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+};
+
+function formText(formData: FormData, key: string, maxLength: number): string {
+    const value = formData.get(key);
+    return typeof value === 'string' ? value.trim().slice(0, maxLength) : '';
+}
+
+function escapeHtml(value: string) {
+    return value.replace(/[&<>"']/g, (character) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+    })[character] as string);
+}
+
+async function markEmailFailed(id: string) {
+    try {
+        await setCareerApplicationEmailStatus(id, 'failed');
+    } catch (error) {
+        console.error('Failed to record career application email status:', error);
+    }
+}
 
 export async function POST(request: Request) {
+    let formData: FormData;
     try {
-        const formData = await request.formData();
+        formData = await request.formData();
+    } catch {
+        return NextResponse.json({ error: 'Invalid application submission.' }, { status: 400 });
+    }
 
-        const fullName = (formData.get('fullName') as string) || '';
-        const email = (formData.get('email') as string) || '';
-        const phone = (formData.get('phone') as string) || '';
-        const position = (formData.get('position') as string) || '';
-        const jobId = (formData.get('jobId') as string) || '';
-        const linkedIn = (formData.get('linkedIn') as string) || '';
-        const experience = (formData.get('experience') as string) || '';
-        const coverNote = (formData.get('coverNote') as string) || '';
-        const resumeFile = formData.get('resume') as File | null;
+    const fullName = formText(formData, 'fullName', 160);
+    const email = formText(formData, 'email', 254);
+    const phone = formText(formData, 'phone', 50);
+    const jobId = formText(formData, 'jobId', 180);
+    const linkedIn = formText(formData, 'linkedIn', 500);
+    const experience = formText(formData, 'experience', 160);
+    const coverNote = formText(formData, 'coverNote', 5000);
+    const resumeEntry = formData.get('resume');
 
-        if (!fullName || !email || !position) {
-            return NextResponse.json(
-                { error: 'Full name, email, and position are required.' },
-                { status: 400 }
-            );
+    if (!fullName || !phone || !jobId || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return NextResponse.json({ error: 'Enter your name, a valid email address, phone number, and position.' }, { status: 400 });
+    }
+    if (linkedIn) {
+        try {
+            const profileUrl = new URL(linkedIn);
+            if (profileUrl.protocol !== 'https:' && profileUrl.protocol !== 'http:') throw new Error('Unsupported protocol.');
+        } catch {
+            return NextResponse.json({ error: 'Enter a valid LinkedIn or portfolio URL.' }, { status: 400 });
         }
+    }
+    if (!resumeEntry || typeof resumeEntry === 'string' || typeof resumeEntry.arrayBuffer !== 'function') {
+        return NextResponse.json({ error: 'Please attach your resume in PDF, DOC, or DOCX format.' }, { status: 400 });
+    }
+    if (resumeEntry.size === 0 || resumeEntry.size > MAX_RESUME_SIZE) {
+        return NextResponse.json({ error: 'Resume files must be between 1 byte and 10 MB.' }, { status: 400 });
+    }
 
-        // Buffer the uploaded resume if provided
-        let resumeAttachment = null;
-        if (resumeFile && typeof resumeFile.arrayBuffer === 'function' && resumeFile.size > 0) {
-            const arrayBuffer = await resumeFile.arrayBuffer();
-            const buffer = Buffer.from(arrayBuffer);
-            resumeAttachment = {
-                filename: resumeFile.name,
-                content: buffer,
-                contentType: resumeFile.type || 'application/octet-stream',
-            };
-        }
+    const originalFileName = resumeEntry.name.split(/[\\/]/).pop() || 'resume';
+    const resumeFileName = originalFileName.replace(/[\u0000-\u001f\u007f"]/g, '_').slice(0, 180);
+    const extension = resumeFileName.toLowerCase().split('.').pop() || '';
+    const resumeContentType = resumeTypes[extension];
+    if (!resumeContentType) {
+        return NextResponse.json({ error: 'Please attach your resume in PDF, DOC, or DOCX format.' }, { status: 400 });
+    }
 
-        // Configure Nodemailer transporter
-        const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.gmail.com',
-            port: Number(process.env.SMTP_PORT) || 465,
-            secure: true,
-            auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS,
-            },
-        });
+    let job;
+    try {
+        job = await getCareerJob(jobId);
+    } catch (error) {
+        console.error('Failed to load job for career application:', error);
+        return NextResponse.json({ error: 'We could not verify this opening. Please try again later.' }, { status: 503 });
+    }
+    if (!job) {
+        return NextResponse.json({ error: 'This opening is no longer available. Please refresh the careers page.' }, { status: 404 });
+    }
 
-        // If credentials are not present, log details clearly for dev mode
-        if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-            console.log('=== CAREER APPLICATION DIRECTED TO careers@leelabiologics.com ===');
-            console.log({
-                targetEmail: 'careers@leelabiologics.com',
-                applicant: fullName,
-                applicantEmail: email,
-                phone,
-                positionApplied: position,
-                jobId,
-                linkedIn: linkedIn || 'N/A',
-                coverNote: coverNote || 'N/A',
-                resumeAttached: resumeAttachment
-                    ? `${resumeAttachment.filename} (${Math.round(resumeAttachment.content.length / 1024)} KB)`
-                    : 'No resume file attached',
-            });
-            console.log('==================================================================');
+    let resumeData: Buffer;
+    try {
+        resumeData = Buffer.from(await resumeEntry.arrayBuffer());
+    } catch (error) {
+        console.error('Failed to read uploaded career resume:', error);
+        return NextResponse.json({ error: 'We could not read the attached resume. Please choose the file again.' }, { status: 400 });
+    }
 
-            // Simulate network request delay
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+    const application: CareerApplication & { resumeData: Buffer } = {
+        id: randomUUID(),
+        createdAt: new Date().toISOString(),
+        fullName,
+        email,
+        phone,
+        jobTitle: job.title,
+        jobId: job.id,
+        reqId: job.reqId,
+        linkedIn,
+        experience,
+        coverNote,
+        resumeFileName,
+        resumeContentType,
+        resumeSize: resumeEntry.size,
+        resumeData,
+        status: 'new',
+        emailStatus: 'pending',
+    };
 
-            return NextResponse.json(
-                {
-                    success: true,
-                    message: `Application and resume for ${position} successfully received and directed to careers@leelabiologics.com`,
-                    attachmentName: resumeAttachment?.filename || null,
-                },
-                { status: 200 }
-            );
-        }
+    try {
+        await createCareerApplication(application);
+    } catch (error) {
+        console.error('Failed to save career application:', error);
+        return NextResponse.json({ error: 'We could not save your application. Please try again later.' }, { status: 500 });
+    }
 
-        const mailOptions: any = {
-            from: process.env.SMTP_USER,
-            to: 'careers@leelabiologics.com', // Directed to careers@leelabiologics.com
-            replyTo: email,
-            subject: `Job Application: ${position} - ${fullName} (${jobId})`,
-            html: `
-                <div style="font-family: Arial, sans-serif; padding: 24px; max-width: 640px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff;">
-                    <h2 style="color: #0e7490; border-bottom: 2px solid #0e7490; padding-bottom: 12px; margin-top: 0;">
-                        New Job Application Received
-                    </h2>
-
-                    <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;">
-                        <strong style="color: #166534; font-size: 16px;">Position Applied:</strong>
-                        <div style="font-size: 18px; font-weight: bold; color: #14532d; margin-top: 2px;">${position}</div>
-                        <div style="font-size: 12px; color: #15803d; margin-top: 2px;">Requisition ID: ${jobId}</div>
-                    </div>
-
-                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-                        <tr>
-                            <td style="padding: 8px 0; color: #64748b; font-weight: bold; width: 140px;">Applicant Name:</td>
-                            <td style="padding: 8px 0; color: #0f172a; font-weight: 600;">${fullName}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px 0; color: #64748b; font-weight: bold;">Email:</td>
-                            <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #0e7490;">${email}</a></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px 0; color: #64748b; font-weight: bold;">Phone:</td>
-                            <td style="padding: 8px 0; color: #0f172a;">${phone || 'Not provided'}</td>
-                        </tr>
-                        ${linkedIn ? `
-                        <tr>
-                            <td style="padding: 8px 0; color: #64748b; font-weight: bold;">LinkedIn:</td>
-                            <td style="padding: 8px 0;"><a href="${linkedIn}" target="_blank" style="color: #0e7490;">${linkedIn}</a></td>
-                        </tr>
-                        ` : ''}
-                        <tr>
-                            <td style="padding: 8px 0; color: #64748b; font-weight: bold;">Resume Attachment:</td>
-                            <td style="padding: 8px 0; color: #059669; font-weight: bold;">
-                                ${resumeAttachment ? `✓ Attached: ${resumeAttachment.filename} (${Math.round(resumeAttachment.content.length / 1024)} KB)` : 'No attachment'}
-                            </td>
-                        </tr>
-                    </table>
-
-                    ${coverNote ? `
-                    <div style="margin-top: 16px;">
-                        <h4 style="color: #0f172a; margin-bottom: 8px;">Candidate Statement / Note:</h4>
-                        <div style="background-color: #f8fafc; padding: 14px; border-radius: 6px; border-left: 4px solid #0e7490; color: #334155; line-height: 1.6;">
-                            ${coverNote.replace(/\n/g, '<br/>')}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0; font-size: 12px; color: #94a3b8; text-align: center;">
-                        This application was submitted via Leelabiologics Careers Portal and directed to careers@leelabiologics.com.
-                    </div>
-                </div>
-            `,
-            attachments: resumeAttachment ? [resumeAttachment] : [],
-        };
-
-        await transporter.sendMail(mailOptions);
-
+    const host = process.env.SMTP_HOST;
+    const port = Number(process.env.SMTP_PORT || 587);
+    const user = process.env.SMTP_USER;
+    const pass = process.env.SMTP_PASS;
+    if (!host || !Number.isInteger(port) || !user || !pass) {
+        await markEmailFailed(application.id);
         return NextResponse.json(
             {
-                success: true,
-                message: `Application and resume for ${position} successfully sent to careers@leelabiologics.com`,
-                attachmentName: resumeAttachment?.filename || null,
+                saved: true,
+                emailSent: false,
+                warning: 'Your application was saved, but the email notification is not configured. Our hiring team can see it in the admin dashboard.',
+                applicationId: application.id,
             },
-            { status: 200 }
-        );
-    } catch (error: any) {
-        console.error('Failed to submit career application:', error);
-        return NextResponse.json(
-            { error: 'Failed to process application. Please email careers@leelabiologics.com directly.' },
-            { status: 500 }
+            { status: 202 }
         );
     }
+
+    const detailRows: [string, string][] = [
+        ['Applicant', fullName],
+        ['Email', email],
+        ['Phone', phone],
+        ['Position', job.title],
+        ['Requisition ID', job.reqId],
+        ['Experience', experience || 'Not provided'],
+        ['LinkedIn / portfolio', linkedIn || 'Not provided'],
+        ['Resume', `${resumeFileName} (${(resumeEntry.size / 1024).toFixed(1)} KB)`],
+        ['Note to hiring manager', coverNote || 'Not provided'],
+    ];
+    const textBody = detailRows.map(([label, value]) => `${label}: ${value}`).join('\n');
+    const htmlBody = detailRows.map(([label, value]) =>
+        `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value).replace(/\n/g, '<br>')}</p>`
+    ).join('');
+
+    try {
+        const transporter = nodemailer.createTransport({
+            host,
+            port,
+            secure: process.env.SMTP_SECURE === 'true' || port === 465,
+            auth: { user, pass },
+        });
+        await transporter.sendMail({
+            from: process.env.SMTP_FROM || user,
+            to: CAREERS_EMAIL,
+            replyTo: email,
+            subject: `Job application: ${job.title.replace(/[\r\n]/g, ' ')} (${job.reqId.replace(/[\r\n]/g, ' ')})`,
+            text: textBody,
+            html: `<div style="font-family:Arial,sans-serif;max-width:640px;margin:auto"><h2>New career application</h2>${htmlBody}</div>`,
+            attachments: [{
+                filename: resumeFileName,
+                content: application.resumeData,
+                contentType: resumeContentType,
+            }],
+        });
+    } catch (error) {
+        console.error('Failed to deliver career application email:', error);
+        await markEmailFailed(application.id);
+        return NextResponse.json(
+            {
+                saved: true,
+                emailSent: false,
+                warning: 'Your application was saved, but the notification email could not be sent. Our hiring team can see it in the admin dashboard.',
+                applicationId: application.id,
+            },
+            { status: 202 }
+        );
+    }
+
+    try {
+        await setCareerApplicationEmailStatus(application.id, 'sent');
+    } catch (error) {
+        console.error('Career application email was sent but its delivery status could not be saved:', error);
+        return NextResponse.json(
+            {
+                saved: true,
+                emailSent: true,
+                warning: 'Your application email was sent, but its delivery status could not be updated.',
+                applicationId: application.id,
+            },
+            { status: 202 }
+        );
+    }
+
+    return NextResponse.json({
+        saved: true,
+        emailSent: true,
+        message: `Your application was sent to ${CAREERS_EMAIL}.`,
+        applicationId: application.id,
+    });
 }

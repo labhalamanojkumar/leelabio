@@ -90,18 +90,18 @@ export default function Header() {
         <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
             <div className={styles.container}>
                 {/* Logo */}
-                <div className={styles.logo}>
+                <Link href="/" className={styles.logo} aria-label={`${SITE_CONFIG.name} home`}>
                     <div className={styles.logoIcon}>
                         <Image
                             src="/images/logo.png"
                             alt={`${SITE_CONFIG.name} Logo`}
                             width={40}
                             height={40}
-                            style={{ objectFit: 'contain' }}
+                            style={{ objectFit: 'contain', width: 40, height: 40 }}
                         />
                     </div>
                     <span className={styles.logoText}>{SITE_CONFIG.name}</span>
-                </div>
+                </Link>
 
                 {/* Desktop Navigation */}
                 <nav ref={navRef} className={styles.desktopNav}>

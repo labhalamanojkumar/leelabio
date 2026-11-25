@@ -2,24 +2,23 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { SITE_CONFIG } from '@/lib/constants';
-import { JOB_OPENINGS, findJobByIdOrSlug } from '@/lib/jobs';
+import { getAdminData } from '@/lib/data-store';
+import type { JobOpening } from '@/lib/jobs';
 import JobApplicationForm from './JobApplicationForm';
 import styles from './jobDetail.module.css';
 
 interface PageProps {
-    params: {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
-export function generateStaticParams() {
-    const idParams = JOB_OPENINGS.map((job) => ({ id: job.id }));
-    const slugParams = JOB_OPENINGS.map((job) => ({ id: job.slug }));
-    return [...idParams, ...slugParams];
-}
+export const dynamic = 'force-dynamic';
 
-export function generateMetadata({ params }: PageProps): Metadata {
-    const job = findJobByIdOrSlug(params.id);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { id } = await params;
+    const { jobs } = await getAdminData();
+    const job = jobs.find((item) => item.id === id || item.slug === id);
     if (!job) return { title: 'Position Not Found | Careers' };
 
     return {
@@ -29,17 +28,21 @@ export function generateMetadata({ params }: PageProps): Metadata {
             title: `${job.title} | ${SITE_CONFIG.name}`,
             description: job.shortDescription,
             type: 'website',
-            url: `${SITE_CONFIG.url}/careers/${params.id}`,
+            url: `${SITE_CONFIG.url}/careers/${id}`,
         },
     };
 }
 
-export default function JobDetailPage({ params }: PageProps) {
-    const job = findJobByIdOrSlug(params.id);
+export default async function JobDetailPage({ params }: PageProps) {
+    const { id } = await params;
+    const { jobs } = await getAdminData();
+    const job: JobOpening | undefined = jobs.find((item) => item.id === id || item.slug === id);
     if (!job) {
         notFound();
     }
 
+    const validThrough = new Date();
+    validThrough.setDate(validThrough.getDate() + 90);
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'JobPosting',
@@ -50,8 +53,8 @@ export default function JobDetailPage({ params }: PageProps) {
             name: SITE_CONFIG.name,
             value: job.reqId,
         },
-        datePosted: '2024-01-15',
-        validThrough: '2026-12-31',
+        datePosted: new Date().toISOString().slice(0, 10),
+        validThrough: validThrough.toISOString().slice(0, 10),
         employmentType: 'FULL_TIME',
         hiringOrganization: {
             '@type': 'Organization',

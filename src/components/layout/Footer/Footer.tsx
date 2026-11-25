@@ -13,16 +13,16 @@ export default function Footer() {
                     <div className={styles.grid}>
                         {/* Brand & Info Column */}
                         <div className={styles.brandColumn}>
-                            <div className={styles.logo}>
+                            <Link href="/" className={styles.logo} aria-label={`${SITE_CONFIG.name} home`}>
                                 <Image
                                     src="/images/logo.png"
                                     alt={`${SITE_CONFIG.name} Logo`}
                                     width={40}
                                     height={40}
-                                    style={{ objectFit: 'contain' }}
+                                    style={{ objectFit: 'contain', width: 40, height: 40 }}
                                 />
                                 <span className={styles.logoText}>{SITE_CONFIG.name}</span>
-                            </div>
+                            </Link>
                             <p className={styles.tagline}>{SITE_CONFIG.description}</p>
                             
                             <div className={styles.contactInfo}>

@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from 'next';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { CookieConsent } from '@/components/features/CookieConsent';
+import SiteChrome from '@/components/layout/SiteChrome';
 import { SITE_CONFIG } from '@/lib/constants';
 import './globals.css';
 import './components.css';
@@ -98,7 +96,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <head>
                 {/* Preconnect to font services */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -128,12 +126,10 @@ export default function RootLayout({
                 />
             </head>
             <body>
-                <Header />
                 <main id="main-content">
                     {children}
                 </main>
-                <Footer />
-                <CookieConsent />
+                <SiteChrome />
             </body>
         </html>
     );

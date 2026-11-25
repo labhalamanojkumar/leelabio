@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Script from 'next/script';
+import type { JSX } from 'react';
 import { SERVICE_SECTIONS, SITE_CONFIG } from '@/lib/constants';
 import styles from './page.module.css';
 

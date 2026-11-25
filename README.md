@@ -5,8 +5,15 @@ A modern, conversion-driven enterprise website built with **Next.js 14**, featur
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies
-npm install
+# Install the locked dependencies
+npm ci
+
+# Copy local configuration templates; set the same password in both files
+Copy-Item .env.postgres.example .env.postgres
+Copy-Item .env.example .env.local
+
+# Start PostgreSQL (Docker Desktop must be running; configure local env files first)
+docker compose up -d
 
 # Run development server
 npm run dev
@@ -18,7 +25,7 @@ npm run build
 npm start
 ```
 
-Open https://leelabiologics.com/ to view the site.
+Open http://localhost:3000 to view the local site.
 
 ## 🛠 Technology Stack
 
@@ -28,7 +35,7 @@ Open https://leelabiologics.com/ to view the site.
 | Language | TypeScript |
 | Styling | CSS Custom Properties |
 | Fonts | Google Fonts (Outfit, Inter) |
-| Deployment | Vercel-ready |
+| Deployment | Docker standalone image, GitHub Actions CI |
 
 ## 📁 Project Structure
 
@@ -68,7 +75,7 @@ docs/                       # Documentation
 - **Solutions** (`/solutions`) - Service overview
 - **Contact** (`/contact`) - RFP form
 - **Facilities** (`/facilities`) - Manufacturing centers
-- **Careers** (`/careers`) - Job listings
+- **Careers** (`/careers`) - Job listings and application submissions
 - **Resources** (`/resources`) - Knowledge hub
 
 ### Solution Pages
@@ -115,6 +122,8 @@ docs/                       # Documentation
 - [ ] Add real images to `/public/images/`
 - [ ] Set up Google Analytics (GA4)
 - [ ] Submit sitemap to Google Search Console
+
+See [docs/deployment.md](./docs/deployment.md) for production environment variables, Docker, and hosting setup.
 - [ ] Configure form backend (HubSpot, API, etc.)
 - [ ] Test on mobile devices
 

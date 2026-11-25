@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function JobApplicationForm({ job }: Props) {
-    const [submitted, setSubmitted] = useState(false);
+    const [submissionResult, setSubmissionResult] = useState<{ applicationId: string; emailSent: boolean; warning?: string } | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isDragOver, setIsDragOver] = useState(false);
@@ -22,6 +22,7 @@ export default function JobApplicationForm({ job }: Props) {
         email: '',
         phone: '',
         linkedIn: '',
+        experience: '',
         coverNote: '',
     });
 
@@ -56,6 +57,10 @@ export default function JobApplicationForm({ job }: Props) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!resumeFile) {
+            setErrorMessage('Please attach your resume in PDF, DOC, or DOCX format.');
+            return;
+        }
         setIsSubmitting(true);
         setErrorMessage(null);
 
@@ -65,9 +70,9 @@ export default function JobApplicationForm({ job }: Props) {
             data.append('email', formData.email);
             data.append('phone', formData.phone);
             data.append('linkedIn', formData.linkedIn);
+            data.append('experience', formData.experience);
             data.append('coverNote', formData.coverNote);
-            data.append('position', job.title);
-            data.append('jobId', job.reqId);
+            data.append('jobId', job.id);
 
             if (resumeFile) {
                 data.append('resume', resumeFile);
@@ -78,15 +83,20 @@ export default function JobApplicationForm({ job }: Props) {
                 body: data,
             });
 
-            if (!res.ok) {
-                const errorData = await res.json().catch(() => ({}));
+            const result = await res.json().catch(() => ({}));
+            if (!res.ok || !result.saved || typeof result.applicationId !== 'string') {
+                const errorData = result as { error?: string };
                 throw new Error(errorData.error || 'Failed to submit application.');
             }
 
-            setSubmitted(true);
-        } catch (err: any) {
+            setSubmissionResult({
+                applicationId: result.applicationId,
+                emailSent: result.emailSent === true,
+                warning: typeof result.warning === 'string' ? result.warning : undefined,
+            });
+        } catch (err: unknown) {
             console.error('Error submitting application:', err);
-            setErrorMessage(err.message || 'An error occurred while submitting your application.');
+            setErrorMessage(err instanceof Error ? err.message : 'An error occurred while submitting your application.');
         } finally {
             setIsSubmitting(false);
         }
@@ -145,20 +155,25 @@ export default function JobApplicationForm({ job }: Props) {
 
             <div className={styles.orDivider}>Or Fill Quick Form & Upload Resume</div>
 
-            {submitted ? (
+            {submissionResult ? (
                 <div className={styles.successMessage}>
                     <div style={{ fontSize: '32px', marginBottom: '8px' }}>🎉</div>
-                    <h4>Application & Resume Received!</h4>
+                    <h4>Application Received</h4>
                     <p>
-                        Thank you for applying for <strong>{job.title}</strong>. Your application and attached resume have been directed to our recruitment desk at <a href={`mailto:${job.email}`} style={{ color: '#166534', fontWeight: 'bold' }}>{job.email}</a>.
+                        Thank you for applying for <strong>{job.title}</strong>. Your application and resume are securely saved for our hiring team.
                     </p>
                     {resumeFile && (
                         <div style={{ margin: '12px 0', padding: '8px 12px', background: '#dcfce7', borderRadius: '6px', fontSize: '12px', color: '#15803d' }}>
-                            📄 <strong>Attached Resume:</strong> {resumeFile.name} ({(resumeFile.size / 1024).toFixed(1)} KB)
+                            <strong>Resume:</strong> {resumeFile.name} ({(resumeFile.size / 1024).toFixed(1)} KB)
                         </div>
                     )}
-                    <p style={{ marginTop: '8px', fontSize: '12px', color: '#15803d' }}>
-                        Our talent team will review your qualifications and contact you within 2–3 business days.
+                    <p style={{ marginTop: '8px', fontSize: '12px', color: submissionResult.emailSent ? '#15803d' : '#9a6708' }} role="status">
+                        {submissionResult.emailSent
+                            ? 'The application notification was also sent to careers@leelabiologics.com.'
+                            : submissionResult.warning || 'Your application is saved, but the notification email was not sent.'}
+                    </p>
+                    <p style={{ marginTop: '6px', fontSize: '11px', color: '#64748b' }}>
+                        Reference: {submissionResult.applicationId}
                     </p>
                 </div>
             ) : (
@@ -215,6 +230,7 @@ export default function JobApplicationForm({ job }: Props) {
                                 ref={fileInputRef}
                                 type="file"
                                 accept=".pdf,.doc,.docx"
+                                aria-required="true"
                                 className={styles.fileInputHidden}
                                 onChange={(e) => {
                                     if (e.target.files && e.target.files[0]) {
@@ -272,6 +288,18 @@ export default function JobApplicationForm({ job }: Props) {
                     </div>
 
                     <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Relevant Experience</label>
+                        <input
+                            type="text"
+                            maxLength={160}
+                            className={styles.formInput}
+                            placeholder="e.g. 5 years in quality assurance"
+                            value={formData.experience}
+                            onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
+                        />
+                    </div>
+
+                    <div className={styles.formGroup}>
                         <label className={styles.formLabel}>LinkedIn / Portfolio Profile URL</label>
                         <input
                             type="url"
@@ -308,7 +336,7 @@ export default function JobApplicationForm({ job }: Props) {
                         )}
                     </button>
                     <p style={{ fontSize: '11px', color: '#64748b', textAlign: 'center', marginTop: '10px' }}>
-                        All applications and attached resumes are routed directly to <a href={`mailto:${job.email}`} style={{ color: '#0e7490', fontWeight: 'bold' }}>{job.email}</a>
+                        Your form submission is saved securely, then emailed to careers@leelabiologics.com when SMTP is configured.
                     </p>
                 </form>
             )}
