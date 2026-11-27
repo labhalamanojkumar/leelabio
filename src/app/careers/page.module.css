@@ -152,6 +152,12 @@
     margin: 0;
 }
 
+@media (max-width: 479px) {
+    .benefitsGrid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
 .openings {
     padding: var(--space-20) 0;
 }

@@ -15,6 +15,7 @@ export default function Header() {
 
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const navRef = useRef<HTMLElement | null>(null);
+    const mobileMenuButtonRef = useRef<HTMLButtonElement | null>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,6 +24,32 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useEffect(() => {
+        if (!isMobileMenuOpen) return;
+
+        const previousOverflow = document.body.style.overflow;
+        const desktopViewport = window.matchMedia('(min-width: 1024px)');
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setIsMobileMenuOpen(false);
+                mobileMenuButtonRef.current?.focus();
+            }
+        };
+        const handleViewportChange = (event: MediaQueryListEvent) => {
+            if (event.matches) setIsMobileMenuOpen(false);
+        };
+
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', handleKeyDown);
+        desktopViewport.addEventListener('change', handleViewportChange);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener('keydown', handleKeyDown);
+            desktopViewport.removeEventListener('change', handleViewportChange);
+        };
+    }, [isMobileMenuOpen]);
 
     // Outside click detection to close mega menu
     useEffect(() => {
@@ -46,8 +73,7 @@ export default function Header() {
     }, []);
 
     const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-        document.body.style.overflow = !isMobileMenuOpen ? 'hidden' : '';
+        setIsMobileMenuOpen((isOpen) => !isOpen);
     };
 
     const handleMouseEnter = (label: string) => {
@@ -87,7 +113,8 @@ export default function Header() {
     };
 
     return (
-        <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
+        <>
+        <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''} ${isMobileMenuOpen ? styles.menuOpen : ''}`}>
             <div className={styles.container}>
                 {/* Logo */}
                 <Link href="/" className={styles.logo} aria-label={`${SITE_CONFIG.name} home`}>
@@ -217,26 +244,34 @@ export default function Header() {
 
                 {/* Mobile Menu Button */}
                 <button
+                    ref={mobileMenuButtonRef}
                     className={`${styles.mobileMenuBtn} ${isMobileMenuOpen ? styles.active : ''}`}
                     onClick={toggleMobileMenu}
-                    aria-label="Toggle menu"
+                    aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-expanded={isMobileMenuOpen}
+                    aria-controls="mobile-navigation"
                 >
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
             </div>
+        </header>
 
             {/* Mobile Menu */}
-            <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ''}`}>
+            <div
+                id="mobile-navigation"
+                className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.open : ''}`}
+                aria-hidden={!isMobileMenuOpen}
+                inert={!isMobileMenuOpen}
+            >
                 <nav className={styles.mobileNav}>
                     {NAVIGATION.main.map((item: NavItem) => (
                         <div key={item.label} className={styles.mobileNavItem}>
                             <Link
                                 href={item.href}
                                 className={styles.mobileNavLink}
-                                onClick={() => !item.children && toggleMobileMenu()}
+                                onClick={toggleMobileMenu}
                             >
                                 {item.label}
                             </Link>
@@ -266,6 +301,7 @@ export default function Header() {
                                                                 setMobileExpandedSection(isExpanded ? null : child.label);
                                                             }}
                                                             aria-label={`Toggle ${child.label} services`}
+                                                            aria-expanded={isExpanded}
                                                         >
                                                             <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
                                                                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -300,6 +336,6 @@ export default function Header() {
                     </Link>
                 </nav>
             </div>
-        </header>
+        </>
     );
 }

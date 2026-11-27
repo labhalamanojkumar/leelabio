@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { SERVICE_SECTIONS, SITE_CONFIG, ServiceSection, ServiceSubsection } from '@/lib/constants';
+import { SERVICE_SECTIONS, SITE_CONFIG } from '@/lib/constants';
 import styles from '../solution.module.css';
 
 interface PageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 // Helper to find Section or Subsection
@@ -38,8 +38,9 @@ export function generateStaticParams() {
     return [...sectionSlugs, ...subsectionSlugs];
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-    const data = findServiceData(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const data = findServiceData(slug);
     if (!data) return { title: 'Service Not Found' };
 
     const title =
@@ -59,13 +60,14 @@ export function generateMetadata({ params }: PageProps): Metadata {
             title,
             description,
             type: 'website',
-            url: `${SITE_CONFIG.url}/solutions/${params.slug}`,
+            url: `${SITE_CONFIG.url}/solutions/${slug}`,
         },
     };
 }
 
-export default function SolutionDetailPage({ params }: PageProps) {
-    const data = findServiceData(params.slug);
+export default async function SolutionDetailPage({ params }: PageProps) {
+    const { slug } = await params;
+    const data = findServiceData(slug);
     if (!data) notFound();
 
     const isSection = data.type === 'section';

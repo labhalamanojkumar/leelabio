@@ -86,7 +86,7 @@ export default function ContactPage() {
                 <div className={styles.container}>
                     <div className={styles.contactGrid}>
                         {/* Form */}
-                        <div className={`${styles.formSection} glass-panel`} style={{ padding: '40px', borderRadius: '16px' }}>
+                        <div className={`${styles.formSection} glass-panel`}>
                             <h2 style={{ color: 'var(--color-primary-800)', marginBottom: '8px' }}>Request for Proposal (RFP)</h2>
                             <p className={styles.formIntro} style={{ marginBottom: '32px' }}>
                                 Provide details about your clinical or commercial manufacturing requirements. A senior alliance manager will respond within 24 business hours.
